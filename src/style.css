@@ -1,5 +1,10 @@
 :root {
   font-size: 14px;
+
+  --border-c-week: #e5e5e5a7;
+  --background-c-week-blue: #ecf5ff;
+  --title-c-normal-blue: #409EFF;
+  --theme-c-blue: rgb(0, 153, 255);
 }
 
 
@@ -11,7 +16,16 @@
 
 
 
+p,
+span {
+  white-space: nowrap;
+}
 
 
-
-
+button {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
