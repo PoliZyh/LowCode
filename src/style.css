@@ -5,6 +5,7 @@
   --background-c-week-blue: #ecf5ff;
   --title-c-normal-blue: #409EFF;
   --theme-c-blue: rgb(0, 153, 255);
+  --border-c-deep: #e6e6e6;
 }
 
 
@@ -14,7 +15,14 @@
   box-sizing: border-box;
 }
 
+html, body, #app {
+  height: 100%;
+  width: 100%;
+}
 
+p {
+  margin-bottom: 0px !important;
+}
 
 p,
 span {

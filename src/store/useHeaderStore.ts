@@ -3,18 +3,20 @@ import { defineStore } from "pinia";
 
 
 interface IHeaderState {
-    header: Array<IHeaderItem>
+    homeHeader: Array<IHeaderItem>;
+    userHeader: Array<IHeaderItem>
 }
 
 const useHeaderStore = defineStore("header", {
 
     state: (): IHeaderState => ({
-        header: [
+        homeHeader: [
             {
                 title: "首页",
                 routeName: 'Home'
             }
-        ]
+        ],
+        userHeader: []
     })
 
 })

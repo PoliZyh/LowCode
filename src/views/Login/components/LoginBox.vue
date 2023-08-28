@@ -57,7 +57,7 @@
                 <button @click="handleLogin">登录</button>
             </div>
             <div class="content-row register-row">
-                <span>
+                <span @click="handleRouterRegister">
                     还没有账号？注册账号
                 </span>
                 <span>
@@ -73,7 +73,14 @@
 
 import { ElMessage } from 'element-plus';
 import { onMounted, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router';
+import useUserStore from '@/store/useUserStore';
 
+const router = useRouter()
+const userStore = useUserStore()
+const emit = defineEmits<{
+    (e: 'changeBox', key: string): void
+}>()
 const isFocusInput = reactive({
     account: false,
     password: false,
@@ -88,9 +95,18 @@ const codeCanvas = ref<HTMLCanvasElement>()
 const correctCode = ref<string[]>([]) // 正确的验证码
 
 
+
+
 onMounted(() => {
     drawCode()
 })
+
+/**
+ * 切换至注册组件
+ */
+const handleRouterRegister = (): void => {
+    emit('changeBox', 'Register')
+}
 
 // 渲染验证码
 const drawCode = (): void => {
@@ -193,7 +209,6 @@ const isValid = (): boolean => {
 
         return false
     }
-    console.log(true);
 
     return true
 }
@@ -204,6 +219,13 @@ const handleLogin = (): void => {
         return;
     }
     // axios
+
+    userStore.setToken(true)
+
+    // router
+    router.push({
+        name: 'Project'
+    })
 }
 
 </script>

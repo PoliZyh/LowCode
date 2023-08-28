@@ -1,15 +1,15 @@
 <template>
     <div class="header-box">
         <div class="header-icon">
-            <img src="../../../assets/images/logo.png" alt="Logo">
+            <img src="../../../assets/images/logo.png" alt="Logo" @click="router.push({name: 'Home'})">
         </div>
         <div class="header-content">
             <div class="nav">
-                <div class="nav-item" v-for="item in store.header" :key="item.routePath" @click="handleRouter(item)">
+                <div class="nav-item" v-for="item in props.data" :key="item.routePath" @click="handleRouter(item)">
                     <span>{{ item.title }}</span>
                 </div>
             </div>
-            <div class="ops">
+            <div class="ops" v-if="!userStore.token">
                 <button @click="router.push({name: 'Login'})">登录 ｜ 注册</button>
             </div>
         </div>
@@ -19,13 +19,14 @@
 
 <script setup lang="ts">
 
-import useHeaderStore from "@/store/useHeaderStore";
 import { useRouter } from "vue-router";
+import useUserStore from "@/store/useUserStore"
 
-
-const store = useHeaderStore()
 const router = useRouter()
-
+const userStore = useUserStore()
+const props = defineProps<{
+    data: Array<IHeaderItem>
+}>()
 
 /**
  * navigation的路由

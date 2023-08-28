@@ -1,7 +1,7 @@
 <template>
     <div class="home-page">
         <!-- 头部 -->
-        <Header></Header>
+        <Header :data="headerStore.homeHeader"></Header>
 
         <!-- 流动大屏 -->
         <div class="stage-welcome">
@@ -10,7 +10,7 @@
                     <h1 v-if="isShowStageWelcomeTitle">FlexiWeb 让编码更简单</h1>
                 </Transition>
                 <Transition name="btn">
-                    <button v-if="isShwoStageWelcomeBtn">Try Me</button>
+                    <button v-if="isShwoStageWelcomeBtn" @click="router.push({name: 'Login'})">Try Me</button>
                 </Transition>
             </div>
             <div>
@@ -38,10 +38,14 @@
 <script setup lang="ts">
 import Header from "@/components/layout/Header/index.vue";
 import { onMounted, onUnmounted, ref } from "vue";
+import useHeaderStore from "@/store/useHeaderStore";
+import { useRouter } from "vue-router";
 
 
 const isShowStageWelcomeTitle = ref<boolean>(false)
 const isShwoStageWelcomeBtn = ref<boolean>(false)
+const headerStore = useHeaderStore()
+const router = useRouter()
 
 onMounted(() => {
     // 挂在时显示组件 触发动画

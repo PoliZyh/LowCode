@@ -2,7 +2,7 @@
     <div class="login-page">
 
         <!-- 登录 / 注册盒子 -->
-        <component :is="componentName"></component>
+        <component :is="componentName" @changeBox="handleChangeBox"></component>
 
         <!-- 背景 -->
         <BackgroundDots />
@@ -18,9 +18,20 @@
 import { ref } from "vue";
 import BackgroundDots from "./components/BackgroundDots.vue";
 import LoginBox from "./components/LoginBox.vue";
+import RegisterBox from "./components/RegisterBox.vue";
 
+const componentName = ref<typeof LoginBox | typeof RegisterBox>(LoginBox)
 
-const componentName = ref(LoginBox)
+/**
+ *  切换LoginBox与RegisterBox
+ */
+const handleChangeBox = (key: string): void => {
+
+    key === 'Login' ? componentName.value = LoginBox
+    : key === 'Register' ? componentName.value = RegisterBox
+    : key === ''
+}
+
 </script>
 
 

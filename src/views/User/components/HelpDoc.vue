@@ -1,9 +1,8 @@
 <template>
-    <div class="register-box">
-        register
+    <div class="help-doc-box">
+        doc
     </div>
 </template>
-
 
 <script setup lang="ts">
 

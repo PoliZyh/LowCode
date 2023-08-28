@@ -2,12 +2,15 @@
 
 import { defineStore } from "pinia";
 
+interface IUserState {
+    token: boolean;
+}
+
 
 const useUserStore = defineStore("user", {
 
-    state: () => ({
-
-
+    state: (): IUserState => ({
+        token: false
     }),
 
     getters: {
@@ -16,15 +19,19 @@ const useUserStore = defineStore("user", {
 
     actions: {
 
+        setToken(newToken: boolean) {
+            this.token = newToken
+        }
+
     },
 
     persist: [
         {
-            paths: ["user"],
+            paths: [],
             storage: localStorage
         },
         {
-            paths: [],
+            paths: ["token"],
             storage: sessionStorage
         }
     ]
