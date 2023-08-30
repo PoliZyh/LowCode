@@ -5,14 +5,27 @@ export interface ICommonAttr {
     top: number;
     width: number;
     height: number;
-    visible: number;
-    fontSize: number;
-    lineHeight: number;
-    letterSpacing: number;
-    color: string;
-    backgroundColor: string;
-    borderColor: string;
-    borderWidth: number;
-    borderRadius: number;
-    textAlign: 'center' | 'left' | 'right';
+    opacity: number | null;
+    fontSize: number | null;
+    lineHeight: number | null;
+    letterSpacing: number | null;
+    color: string | null;
+    backgroundColor: string | null;
+    borderColor: string | null;
+    borderWidth: number | null;
+    borderRadius: number | null;
+    textAlign: 'center' | 'left' | 'right' | null;
+}
+
+export interface ICommonAttrInputItem {
+    label: string;
+    inputType: 'text' | 'number' | 'select' | 'colorPicker';
+    key: string;
+    value: ICommonAttr[keyof ICommonAttr];
+    selectOptions?: Array<ICommonAttrSelectOption>
+}
+
+export interface ICommonAttrSelectOption {
+    label: string;
+    value: string;
 }

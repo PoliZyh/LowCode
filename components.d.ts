@@ -8,10 +8,18 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Attr: typeof import('./src/components/custome-components/MButton/Attr.vue')['default']
+    CommonAttr: typeof import('./src/components/common/CommonAttr.vue')['default']
     ComponentBackgroundDots: typeof import('./src/components/Login/ComponentBackgroundDots.vue')['default']
     Editor: typeof import('./src/components/common/Editor/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElColorPicker: typeof import('element-plus/es')['ElColorPicker']
     ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabPanel: typeof import('element-plus/es')['ElTabPanel']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
     Header: typeof import('./src/components/layout/Header/index.vue')['default']
     MButton: typeof import('./src/components/custome-components/MButton/index.vue')['default']
     MImage: typeof import('./src/components/custome-components/MImage/index.vue')['default']

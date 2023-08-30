@@ -9,6 +9,7 @@
         v-for="item in (props.isActive ? pointList : [])"
         :key="item"
         :style="getPointStyle(item)"
+        @mousedown="handleMouseDownOnPoint($event, item)"
         ></div>
 
         <div class="test"></div>
@@ -24,9 +25,11 @@
 <script setup lang="ts">
 import type { ICustomeComponent } from '@/components/custome-components/types';
 import useComponentsStore from '@/store/useComponentStore';
+import useSnapshotStore from '@/store/useSnapshotStore';
 
 const pointList = ['t', 'r', 'b', 'l', 'lt', 'rt', 'rb', 'lb']
 const componentStore = useComponentsStore()
+const snapshotStore = useSnapshotStore()
 const props = defineProps<{
     isActive: boolean;
     el: ICustomeComponent
@@ -73,6 +76,10 @@ const handleClickComponent = (e: Event) => {
     componentStore.setActiveComponent(props.el)
 }
 
+const handleIsClickShape = (oldPos: {left: number; top: number;}, newPos: {left: number; top: number}): boolean => {
+    return oldPos.left === newPos.left && oldPos.top === newPos.top
+}
+
 // 鼠标点下Shape事件
 const handleMouseDownOnShape = (e: MouseEvent) => {
     e.stopPropagation()
@@ -92,11 +99,60 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
         componentStore.setActiveComponentStyle(oldStyle)
     }
 
-    const up = () => {
+    const up = (mouseEvent :MouseEvent) => {
+        // 判断是不是点击Shape，若不是则保存快照
+        !handleIsClickShape({
+            left: oldX,
+            top: oldY
+        },{
+            left: mouseEvent.clientX,
+            top: mouseEvent.clientY
+        }) && snapshotStore.saveSnapshot()
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
     }
 
+    document.addEventListener('mousemove', move)
+    document.addEventListener('mouseup', up)
+}
+
+
+// 鼠标点下Point事件 改变组件大小
+const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
+    e.stopPropagation()
+    // 获取当前组件的大小
+    const oldStyle = {...props.el.style}
+    const { width, height, left, top } = oldStyle
+    // 获取鼠标点击的位置
+    const oldX = e.clientX
+    const oldY = e.clientY
+    let isSaved = false
+    const move = (moveEvent: MouseEvent) => {
+        const curX = moveEvent.clientX
+        const curY = moveEvent.clientY
+        const disX = curX - oldX
+        const disY = curY - oldY
+        const hasT = /t/.test(point)
+        const hasL = /l/.test(point)
+        const hasR = /r/.test(point)
+        const hasB = /b/.test(point)
+        const newHeight = height + (hasT ? -disY : hasB ? disY : 0)
+        const newWidth = width + (hasL ? -disX : hasR ? disX : 0)
+        const newLeft = left + (hasL ? disX : 0)
+        const newTop = top + (hasT ? disY : 0)
+        oldStyle.top = newTop
+        oldStyle.left = newLeft
+        oldStyle.width = newWidth
+        oldStyle.height = newHeight
+        componentStore.setActiveComponentStyle(oldStyle)
+    }
+    const up = () => {
+        console.log('up')
+        isSaved = true
+        isSaved && snapshotStore.saveSnapshot()
+        document.removeEventListener('mousemove', move)
+        document.removeEventListener('mouseup', up)
+    }
     document.addEventListener('mousemove', move)
     document.addEventListener('mouseup', up)
 }
@@ -115,10 +171,11 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
         position: absolute;
         background-color: white;
         border: 1px solid rgb(89, 186, 255);
-        z-index: 3000;
+        z-index: 3001;
     }
 }
 .active {
     outline: 1px solid rgb(89, 186, 255);
+    z-index: 3000;
 }
 </style>

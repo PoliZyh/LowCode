@@ -1,6 +1,6 @@
 <template>
     <div class="m-text">
-        <span>{{ props.propValue }}</span>
+        <span :style="props.componentStyle">{{ props.propValue }}</span>
     </div>
 </template>
 
@@ -19,6 +19,7 @@ const props = defineProps<{
 .m-text {
     position: relative;
     span {
+        display: block;
         width: fit-content;
     }
 }

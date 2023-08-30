@@ -11,6 +11,7 @@ import 'ant-design-vue/dist/reset.css';
 import pinia from './store'
 import router from './router'
 
+
 // 注册自定义组件
 import { registerComponents } from './components/custome-components/registerComponents'
 

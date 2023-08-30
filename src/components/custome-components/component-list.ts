@@ -20,6 +20,9 @@ export const componentList: Array<ICustomeComponent> = [
             ...commonAttr,
             width: 100,
             height: 34,
+            borderWidth: 1,
+            borderColor: '#C7C7C7',
+            backgroundColor: 'white'
         }
     },
     {

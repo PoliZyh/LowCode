@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+import useSnapshotStore from "./useSnapshotStore";
 import type { ICustomeComponent, ICustomeStyle } from "@/components/custome-components/types";
 
 interface IComponentState {
@@ -30,7 +30,14 @@ const useComponentsStore = defineStore('components', {
         },
 
         setActiveComponentStyle(style: ICustomeStyle) {
+            // 修改样式需要进行快照处理
+            // const snapeshotStore = useSnapshotStore()
             this.curActiveComponent!.style = {...this.curActiveComponent!.style, ...style};
+            // snapeshotStore.saveSnapshot()
+        },
+
+        setCurComponents(components: ICustomeComponent[]) {
+            this.curComponents = [...components];
         }
     }
 })

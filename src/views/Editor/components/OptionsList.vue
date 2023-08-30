@@ -4,10 +4,7 @@
             <el-button>项目列表</el-button>
         </div>
         <div class="ops-item">
-            <el-button>撤销</el-button>
-        </div>
-        <div class="ops-item">
-            <el-button>重做</el-button>
+            <el-button @click="handleClickRevoke">撤销</el-button>
         </div>
         <div class="ops-item">
             <el-button>保存</el-button>
@@ -22,6 +19,14 @@
 </template>
 
 <script lang="ts" setup>
+
+import useSnapshotStore  from '@/store/useSnapshotStore';
+
+const snapshotStore = useSnapshotStore();
+
+const handleClickRevoke = () => {
+    snapshotStore.revoke();
+}
 
 </script>
 

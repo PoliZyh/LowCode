@@ -16,7 +16,6 @@
             <component
             :is="item.componentName"
             :propValue="item.propValue"
-            :type="item?.type"
             :component-style="getCustomeComponentStyle(item.style)"
             ></component>
         </Shape>
@@ -28,12 +27,14 @@
 <script setup lang="ts">
 import Shape from './Shape.vue';
 import useComponentsStore from '@/store/useComponentStore';
+import useSnapshotStore from '@/store/useSnapshotStore';
 import { deepCopy } from '@/utils/deepCopy';
 import { componentList } from '@/components/custome-components/component-list';
 import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import type { ICustomeComponent } from '@/components/custome-components/types';
 
 const componentStore = useComponentsStore();
+const snapshotStore = useSnapshotStore();
 
 // 松开拖拽的组件事件
 const handleDrop = (e: DragEvent) => {
@@ -49,6 +50,8 @@ const handleDrop = (e: DragEvent) => {
     componentStore.addComponent(component)
     // 设置当前激活的组件
     componentStore.setActiveComponent(component)
+    // 快照
+    snapshotStore.saveSnapshot()
 }
 
 const handleDragOver = (e: DragEvent) => {
