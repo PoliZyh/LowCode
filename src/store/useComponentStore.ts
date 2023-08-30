@@ -31,9 +31,7 @@ const useComponentsStore = defineStore('components', {
 
         setActiveComponentStyle(style: ICustomeStyle) {
             // 修改样式需要进行快照处理
-            // const snapeshotStore = useSnapshotStore()
             this.curActiveComponent!.style = {...this.curActiveComponent!.style, ...style};
-            // snapeshotStore.saveSnapshot()
         },
 
         setCurComponents(components: ICustomeComponent[]) {
