@@ -1,5 +1,6 @@
 <template>
     <div class="grid-box"
+    ref="gridBox"
     @drop="handleDrop"
     @dragover="handleDragOver"
     @click="handleClickGrid"
@@ -7,7 +8,7 @@
 
         <!-- 渲染画布上的组件 -->
         <Shape
-        v-for="item in componentStore.curComponents"
+        v-for="(item, index) in componentStore.curComponents"
         :key="item.componentName"
         :isActive="item === componentStore.curActiveComponent"
         :style="getShapeStyle(item.style)"
@@ -17,24 +18,46 @@
             :is="item.componentName"
             :propValue="item.propValue"
             :component-style="getCustomeComponentStyle(item.style)"
+            :zIndex="index"
             ></component>
         </Shape>
 
+        <!-- 吸附标线 -->
+        <MarkLine></MarkLine>
+
+        
+
     </div>
+
+    <!-- 右键弹窗 -->
+    <ContextMenu
+    :left="contextMenuPos.x"
+    :top="contextMenuPos.y"
+    ></ContextMenu>
+
+
 </template>
 
 
 <script setup lang="ts">
 import Shape from './Shape.vue';
+import ContextMenu from './ContextMenu.vue'
+import MarkLine from './MarkLine.vue'
 import useComponentsStore from '@/store/useComponentStore';
 import useSnapshotStore from '@/store/useSnapshotStore';
+import useContextmenuStore from '@/store/useContextmenuStore';
 import { deepCopy } from '@/utils/deepCopy';
 import { componentList } from '@/components/custome-components/component-list';
 import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import type { ICustomeComponent } from '@/components/custome-components/types';
+import { onMounted, ref, reactive } from 'vue';
 
 const componentStore = useComponentsStore();
 const snapshotStore = useSnapshotStore();
+const contextmenuStore = useContextmenuStore();
+
+const gridBox = ref<HTMLElement | null>(null);
+const contextMenuPos = reactive({ x: 0, y: 0 })
 
 // 松开拖拽的组件事件
 const handleDrop = (e: DragEvent) => {
@@ -45,10 +68,11 @@ const handleDrop = (e: DragEvent) => {
     const index = Number(e.dataTransfer?.getData('index')) || 0
     let component: ICustomeComponent = deepCopy(componentList[index])
     // 计算鼠标松开时，距离画布左侧和上侧的距离e.offset，并修改component
-    component.style.top = e.offsetY
-    component.style.left = e.offsetX
+    component.style.top = e.clientY - 76
+    component.style.left = e.clientX - 210
     componentStore.addComponent(component)
     // 设置当前激活的组件
+    componentStore.setActiveComponent(null)
     componentStore.setActiveComponent(component)
     // 快照
     snapshotStore.saveSnapshot()
@@ -61,11 +85,29 @@ const handleDragOver = (e: DragEvent) => {
 // 点击画布事件
 const handleClickGrid = (e: Event) => {
     e.stopPropagation()
-    // 点击画布时，将当前激活的组件设置为null
+    // 点击画布时，将当前激活的组件设置为null,
     componentStore.setActiveComponent(null)
 }
 
-
+onMounted(() => {
+    // grid挂载时候对组件右键弹出contextmenu进行处理
+    gridBox.value!.oncontextmenu = async (e: MouseEvent) => {
+        e.preventDefault()
+        contextmenuStore.deactiveContextmenu()
+        const target = e.target as HTMLElement
+        const index = target.dataset.zindex
+        if (!index) {
+            // index为undefined即点击的画布
+            return;
+        } else {
+            contextmenuStore.activeContextmenu()
+            contextMenuPos.x = e.clientX
+            contextMenuPos.y = e.clientY - 56 // 修正高度
+        }
+        console.log(target.dataset.zindex)
+        console.log(e.clientY)
+    }
+})
 
 </script>
 
@@ -78,4 +120,5 @@ const handleClickGrid = (e: Event) => {
     position: relative;
 
 }
+
 </style>

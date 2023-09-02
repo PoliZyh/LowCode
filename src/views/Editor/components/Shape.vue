@@ -12,11 +12,8 @@
         @mousedown="handleMouseDownOnPoint($event, item)"
         ></div>
 
-        <div class="test"></div>
-
         <!-- 组件 -->
         <slot></slot>
-
 
     </div>
 </template>
@@ -26,10 +23,14 @@
 import type { ICustomeComponent } from '@/components/custome-components/types';
 import useComponentsStore from '@/store/useComponentStore';
 import useSnapshotStore from '@/store/useSnapshotStore';
+import useContextmenuStore from '@/store/useContextmenuStore';
+import useMarkLineStore from '@/store/useMarkLineStore';
 
 const pointList = ['t', 'r', 'b', 'l', 'lt', 'rt', 'rb', 'lb']
 const componentStore = useComponentsStore()
 const snapshotStore = useSnapshotStore()
+const contextmenuStore = useContextmenuStore()
+const markLineStore = useMarkLineStore()
 const props = defineProps<{
     isActive: boolean;
     el: ICustomeComponent
@@ -91,15 +92,23 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
     // 获取鼠标点击的位置
     const oldX = e.clientX
     const oldY = e.clientY
+    let hasCloseContextmenu = false
+    let hasSubmitMoved = false
     const move = (moveEvent: MouseEvent) => {
+        // 避免多次触发
+        !hasCloseContextmenu && contextmenuStore.deactiveContextmenu()
+        !hasSubmitMoved && markLineStore.movingMarkLine()
+        hasCloseContextmenu = true
+        hasSubmitMoved = true
         const curX = moveEvent.clientX
         const curY = moveEvent.clientY
         oldStyle.left = curX - oldX + left
         oldStyle.top = curY - oldY + top
         componentStore.setActiveComponentStyle(oldStyle)
+        markLineStore.activeLines()
     }
 
-    const up = (mouseEvent :MouseEvent) => {
+    const up = (mouseEvent: MouseEvent) => {
         // 判断是不是点击Shape，若不是则保存快照
         !handleIsClickShape({
             left: oldX,
@@ -108,6 +117,7 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
             left: mouseEvent.clientX,
             top: mouseEvent.clientY
         }) && snapshotStore.saveSnapshot()
+        markLineStore.endMovingMarkLine()
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
     }
@@ -120,6 +130,7 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
 // 鼠标点下Point事件 改变组件大小
 const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
     e.stopPropagation()
+    contextmenuStore.deactiveContextmenu()
     // 获取当前组件的大小
     const oldStyle = {...props.el.style}
     const { width, height, left, top } = oldStyle

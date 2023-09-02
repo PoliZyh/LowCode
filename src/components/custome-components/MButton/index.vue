@@ -1,8 +1,11 @@
 <template>
-    <div class="m-button">
+    <div class="m-button"
+    :style="{'zIndex': props.zIndex}"
+    >
 
         <button
         :style="props.componentStyle"
+        :data-zindex="props.zIndex"
         >
             {{ props.propValue }}
         </button>
@@ -13,12 +16,14 @@
 
 <script setup lang="ts">
 
-
+// props三个是必须的
+// zIndex需要赋值给最外层以及携带给内部组件data-zindex
 
 
 const props = defineProps<{
     propValue: string;
     componentStyle: any;
+    zIndex: number;
 }>();
 
 </script>

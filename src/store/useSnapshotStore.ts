@@ -50,7 +50,7 @@ const useSnapshotStore = defineStore("snapshot", {
             componentsStore.setActiveComponent(null)
             if (this.curSanpShotIndex < 0) {
                 componentsStore.setCurComponents([])
-            } else {
+            } else { 
                 componentsStore.setCurComponents(this.snapeshot[this.curSanpShotIndex])
             }
             console.log('revoke', this.curSanpShotIndex, componentsStore.curComponents)

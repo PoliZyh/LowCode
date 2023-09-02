@@ -1,6 +1,11 @@
 <template>
-    <div class="m-text">
-        <span :style="props.componentStyle">{{ props.propValue }}</span>
+    <div class="m-text"
+    :style="{'zIndex': props.zIndex}"
+    >
+        <span
+        :style="props.componentStyle"
+        :data-zindex="props.zIndex"
+        >{{ props.propValue }}</span>
     </div>
 </template>
 
@@ -10,6 +15,7 @@
 const props = defineProps<{
     propValue: string;
     componentStyle: any;
+    zIndex: number;
 }>()
 
 </script>
