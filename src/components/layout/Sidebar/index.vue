@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 
-import { ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
 const activeKey = ref(0)
@@ -26,16 +26,19 @@ watch(
         setActiveKey(route.name as string)
     }
 )
+onMounted(() => {
+    setActiveKey(route.name as string)
+})
 
 const handleClickItem = (routeName: string): void => {
     // 路由
     router.push({
         name: routeName
     })
-    setActiveKey(routeName)
 }
 
 const setActiveKey = (item: string) => {
+    console.log(item)
     activeKey.value = props.data.findIndex(i => i.routeName === item)
 }
 

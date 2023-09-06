@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@kangc/v-md-editor": "^2.3.17",
     "ant-design-vue": "^4.0.1",
     "element-plus": "^2.3.9",
     "less": "^4.2.0",

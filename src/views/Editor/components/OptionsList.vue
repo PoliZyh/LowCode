@@ -1,7 +1,7 @@
 <template>
     <div class="opstion-list-box">
         <div class="ops-item">
-            <el-button>项目列表</el-button>
+            <el-button @click="router.push({name: 'Project'})">项目列表</el-button>
         </div>
         <div class="ops-item">
             <el-button
@@ -53,11 +53,13 @@ import useSnapshotStore  from '@/store/useSnapshotStore';
 import useComponentsStore from '@/store/useComponentStore';
 import useEditorRoutesStore from '@/store/useEditorRoutesStore';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 
 const snapshotStore = useSnapshotStore();
 const componentsStore = useComponentsStore();
 const editorRoutesStore = useEditorRoutesStore();
+const router = useRouter();
 const isShowDialog = ref(false);
 const isShowRouteTableDialog = ref(false);
 

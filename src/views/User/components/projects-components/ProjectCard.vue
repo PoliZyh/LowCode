@@ -1,12 +1,12 @@
 <template>
     <div class="project-card-box">
         <div class="card-header card-item" @click="handleViewEditor">
-            <span>声纹识别项目</span>
+            <span>{{ props.info.name }}</span>
             <el-icon><ArrowRight /></el-icon>
         </div>
         <div class="card-content card-item">
             <span>项目简介</span>
-            <span>web期末项目--饿了吧外卖订餐项web期末项目--饿了吧外卖订餐项web期末项目--饿了吧外卖订餐项web期末项目--饿了吧外卖订餐项web期末项目--饿了吧外卖订餐项web期末项目--饿了吧外卖订餐项目web期末项目--饿了吧外卖订餐项目web期末项目--饿了吧外卖订餐项目</span>
+            <span>{{ props.info.description }}</span>
         </div>
         <div class="card-bottom card-item">
             <div class="ops-item">
@@ -25,8 +25,12 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import type { IProjectInfoItem } from '../../types'
 
 const router = useRouter()
+const props = defineProps<{
+    info: IProjectInfoItem
+}>()
 
 const handleViewEditor = () => {
     router.push({

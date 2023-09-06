@@ -11,6 +11,18 @@ import 'ant-design-vue/dist/reset.css';
 import pinia from './store'
 import router from './router'
 
+// 渲染markdown https://ckang1229.gitee.io/vue-markdown-editor/zh/examples/preview-demo.html#%E5%BC%95%E5%85%A5
+import VMdPreview from '@kangc/v-md-editor/lib/preview';
+import '@kangc/v-md-editor/lib/style/preview.css';
+import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
+import '@kangc/v-md-editor/lib/theme/style/github.css';
+
+// highlightjs
+import hljs from 'highlight.js';
+
+VMdPreview.use(githubTheme, {
+  Hljs: hljs,
+});
 
 // 注册自定义组件
 import { registerComponents } from './components/custome-components/registerComponents'
@@ -24,6 +36,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 registerComponents(app)
 
-app.use(pinia).use(router).use(Antd)
+app.use(pinia).use(router).use(Antd).use(VMdPreview)
 
 app.mount('#app')

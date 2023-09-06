@@ -21,12 +21,12 @@ const constantRoutes: RouteRecordRaw[] = [
             {
                 path: '',
                 name: 'Project',
-                component: import('@/views/User/components/Projects.vue')
+                component: () => import('@/views/User/components/Projects.vue')
             },
             {
                 path: 'help-doc',
                 name: 'HelpDoc',
-                component: import('@/views/User/components/HelpDoc.vue')
+                component: () => import('@/views/User/components/HelpDoc.vue')
             }
         ]
     },
