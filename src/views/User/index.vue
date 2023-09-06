@@ -35,7 +35,7 @@ const headerStore = useHeaderStore()
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
-        background-color: rgba(240, 240, 240, 0.855);
+        background-color: rgba(247, 247, 247, 0.855);
     }
 }
 </style>

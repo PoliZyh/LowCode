@@ -2,7 +2,8 @@
     <div class="personal-dialog">
         <el-dialog title="个性化设置"
         :model-value="props.isShow"
-        :before-close="handleBeforeClose">
+        :before-close="handleBeforeClose"
+        width="40%">
             <div class="row">
                 <el-tooltip
                 effect="dark"
