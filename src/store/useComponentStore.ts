@@ -30,9 +30,9 @@ const useComponentsStore = defineStore('components', {
 
         // 设置当前激活的组件
         setActiveComponent(component: ICustomeComponent | null) {
+            const contextmenuStore = useContextmenuStore();
             if (!component) {
                 // 当所有组件失活的时候，确保contextmenu也是关闭状态
-                const contextmenuStore = useContextmenuStore();
                 contextmenuStore.deactiveContextmenu()
             }
             this.curActiveComponent = component;

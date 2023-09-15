@@ -4,10 +4,12 @@
     v-show="contextmenuStore.isActive"
     >
         <ul>
-            <li @click="handleMoveUpOneLayer()">上移一层</li>
-            <li @click="handleMoveDownOneLayer()">下移一层</li>
-            <li @click="handleMoveToTop()">置顶</li>
-            <li @click="handleMoveToBottom()">置底</li>
+            <li @click="handleMoveUpOneLayer()" v-permission="'up'">上移一层</li>
+            <li @click="handleMoveDownOneLayer()" v-permission="'down'">下移一层</li>
+            <li @click="handleMoveToTop()" v-permission="'top'">置顶</li>
+            <li @click="handleMoveToBottom()" v-permission="'bottom'">置底</li>
+            <li @click="handleCopy()" v-permission="'copy'">复制</li>
+            <li @click="handlePaste($event)" :class="{'disabled': !contextmenuStore.clipBoard}" v-permission="'paste'">粘贴</li>
         </ul>
     </div>
 </template>
@@ -62,6 +64,23 @@ const handleMoveToBottom = () => {
     snapshotStore.saveSnapshot()
 }
 
+// 复制
+const handleCopy = () => {
+    contextmenuStore.deactiveContextmenu()
+    contextmenuStore.copyComponent()
+}
+
+// 粘贴
+const handlePaste = (e: MouseEvent) => {
+    if (!contextmenuStore.clipBoard) return
+    // 鼠标落下相对于canvas的位置
+    const newX = e.clientX - 210
+    const newY = e.clientY - 76
+    contextmenuStore.deactiveContextmenu()
+    contextmenuStore.pasteComponent(newX, newY)
+    snapshotStore.saveSnapshot()
+}
+
 </script>
 
 
@@ -82,12 +101,19 @@ const handleMoveToBottom = () => {
             padding: 7px 7px;
             cursor: pointer;
             background-color: #fff;
+            width: 62px;
         }
         li:not(:first-child) {
             border-top: 1px solid var(--b-c);
         }
         li:hover {
             background-color: rgb(241, 245, 246);
+        }
+        .disabled {
+            background-color: rgb(244, 244, 244) !important;
+            color: grey;
+            opacity: 0.7;
+            cursor: auto !important;
         }
     }
 }

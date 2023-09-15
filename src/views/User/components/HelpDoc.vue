@@ -28,6 +28,8 @@ import { onMounted, reactive, ref } from 'vue';
 
 import IntroductionThanks from './docs/introduction_thanks.md?raw'
 import IntroductionAuthor from './docs/introduction_author.md?raw'
+import IntroductionPlateform from './docs/introduction_plateform.md?raw'
+import TechnologyComponentDesign from './docs/technology_component-design.md?raw'
 
 const docData: IDocItem[] = reactive([
     {
@@ -43,7 +45,7 @@ const docData: IDocItem[] = reactive([
             },
             {
                 title: '平台',
-                content: ''
+                content: IntroductionPlateform
             }
         ]
     },
@@ -60,12 +62,16 @@ const docData: IDocItem[] = reactive([
         title: '平台实现',
         children: [
             {
-                title: '组件拖拽',
+                title: '组件设计',
+                content: TechnologyComponentDesign
+            },
+            {
+                title: '组件功能',
                 content: ''
             },
             {
-                title: '组件缩放',
-                content: ''
+                title: '敬请期待',
+                content: '# 持续更新ing...'
             }
         ]
     }

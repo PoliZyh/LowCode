@@ -25,7 +25,7 @@
         <!-- 吸附标线 -->
         <MarkLine></MarkLine>
 
-        
+
 
     </div>
 
@@ -94,18 +94,9 @@ onMounted(() => {
     gridBox.value!.oncontextmenu = async (e: MouseEvent) => {
         e.preventDefault()
         contextmenuStore.deactiveContextmenu()
-        const target = e.target as HTMLElement
-        const index = target.dataset.zindex
-        if (!index) {
-            // index为undefined即点击的画布
-            return;
-        } else {
-            contextmenuStore.activeContextmenu()
-            contextMenuPos.x = e.clientX
-            contextMenuPos.y = e.clientY - 56 // 修正高度
-        }
-        console.log(target.dataset.zindex)
-        console.log(e.clientY)
+        contextmenuStore.activeContextmenu()
+        contextMenuPos.x = e.clientX
+        contextMenuPos.y = e.clientY - 56 // 修正高度
     }
 })
 

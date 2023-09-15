@@ -5,6 +5,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
+import {prismjsPlugin} from 'vite-plugin-prismjs';
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -13,6 +15,9 @@ export default defineConfig({
       }),
       Components({
         resolvers: [ElementPlusResolver()],
+      }),
+      prismjsPlugin({
+        languages: ['json', 'js'],
       }),
     ],
   resolve: {

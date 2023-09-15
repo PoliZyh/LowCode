@@ -20,6 +20,8 @@ import '@kangc/v-md-editor/lib/theme/style/github.css';
 // highlightjs
 import hljs from 'highlight.js';
 
+import directives from './directives'
+
 VMdPreview.use(githubTheme, {
   Hljs: hljs,
 });
@@ -36,6 +38,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 
 registerComponents(app)
 
-app.use(pinia).use(router).use(Antd).use(VMdPreview)
+app.use(pinia).use(router).use(Antd).use(VMdPreview).use(directives)
 
 app.mount('#app')
