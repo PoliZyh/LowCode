@@ -12,6 +12,11 @@
         @mousedown="handleMouseDownOnPoint($event, item)"
         ></div>
 
+        <!-- 删除图标 -->
+        <el-icon class="de-icon" v-show="props.isActive" @click="handleDelete">
+            <Delete></Delete>
+        </el-icon>
+
         <!-- 组件 -->
         <slot></slot>
 
@@ -168,6 +173,12 @@ const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
     document.addEventListener('mouseup', up)
 }
 
+// 删除组件事件
+const handleDelete = () => {
+    componentStore.removeComponent(componentStore.curActiveComponent)
+    snapshotStore.saveSnapshot()
+}
+
 </script>
 
 
@@ -183,6 +194,15 @@ const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
         background-color: white;
         border: 1px solid rgb(89, 186, 255);
         z-index: 3001;
+        cursor: pointer;
+    }
+    .de-icon {
+        color: red;
+        position: absolute;
+        z-index: 3001;
+        right: 0px;
+        top: -30px;
+        cursor: pointer;
     }
 }
 .active {
