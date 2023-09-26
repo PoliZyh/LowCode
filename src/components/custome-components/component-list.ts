@@ -22,7 +22,7 @@ export const componentList: Array<ICustomeComponent> = [
             height: 34,
             borderWidth: 1,
             borderColor: '#C7C7C7',
-            backgroundColor: 'white'
+            backgroundColor: '#FFFFFF'
         }
     },
     {

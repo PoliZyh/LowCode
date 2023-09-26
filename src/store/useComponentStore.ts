@@ -27,6 +27,7 @@ const useComponentsStore = defineStore('components', {
             if (component) {
                 const index = this.curComponents.indexOf(component);
                 this.curComponents.splice(index, 1);
+                this.curActiveComponent = null
             }
         },
 

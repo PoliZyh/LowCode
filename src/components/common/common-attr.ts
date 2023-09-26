@@ -15,7 +15,7 @@ export const commonAttr: ICommonAttr = {
     fontSize: 16,
     lineHeight: 20,
     letterSpacing: 0,
-    color: '',
+    color: '#000000',
     backgroundColor: '',
     borderColor: '',
     borderWidth: 0,

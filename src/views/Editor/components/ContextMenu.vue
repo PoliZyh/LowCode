@@ -9,6 +9,7 @@
             <li @click="handleMoveToTop()" v-permission="'top'">置顶</li>
             <li @click="handleMoveToBottom()" v-permission="'bottom'">置底</li>
             <li @click="handleCopy()" v-permission="'copy'">复制</li>
+            <li @click="handleCut()" v-permission="'cut'">剪切</li>
             <li @click="handlePaste($event)" :class="{'disabled': !contextmenuStore.clipBoard}" v-permission="'paste'">粘贴</li>
         </ul>
     </div>
@@ -78,6 +79,13 @@ const handlePaste = (e: MouseEvent) => {
     const newY = e.clientY - 76
     contextmenuStore.deactiveContextmenu()
     contextmenuStore.pasteComponent(newX, newY)
+    snapshotStore.saveSnapshot()
+}
+
+// 剪切
+const handleCut = () => {
+    contextmenuStore.deactiveContextmenu()
+    contextmenuStore.cutComponent()
     snapshotStore.saveSnapshot()
 }
 
