@@ -25,7 +25,8 @@
         <!-- 吸附标线 -->
         <MarkLine></MarkLine>
 
-
+        <!-- 预览组件 -->
+        <Preview></Preview>
 
     </div>
 
@@ -51,6 +52,7 @@ import { componentList } from '@/components/custome-components/component-list';
 import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import type { ICustomeComponent } from '@/components/custome-components/types';
 import { onMounted, ref, reactive } from 'vue';
+import Preview from './Preview.vue';
 
 const componentStore = useComponentsStore();
 const snapshotStore = useSnapshotStore();

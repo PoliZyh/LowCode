@@ -32,7 +32,7 @@
             </el-button>
         </div>
         <div class="ops-item">
-            <el-button>预览</el-button>
+            <el-button @click="handlePreview">预览</el-button>
         </div>
         <div class="ops-item">
             <el-button @click="isShowDialog = true">个性化设置</el-button>
@@ -55,6 +55,8 @@ import useEditorRoutesStore from '@/store/useEditorRoutesStore';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
+import $bus from '@/utils/bus';
+
 
 const snapshotStore = useSnapshotStore();
 const componentsStore = useComponentsStore();
@@ -93,6 +95,11 @@ const handleNewBuild = () => {
     editorRoutesStore.setCurRouteInfo('', '')
     snapshotStore.$reset()
     componentsStore.$reset()
+}
+
+// 预览按钮的回调
+const handlePreview = () => {
+    $bus.emit('showPreview', { isShow: true })
 }
 
 </script>
