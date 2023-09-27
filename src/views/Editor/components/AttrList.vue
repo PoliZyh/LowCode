@@ -2,7 +2,14 @@
     <div class="attr-list-box">
         <el-tabs class="tabs" v-show="componentsStore.curActiveComponent !== null">
             <el-tab-pane label="属性">
-                <CommonAttr />
+                <el-collapse>
+                    <el-collapse-item title="通用属性">
+                        <CommonAttr />
+                    </el-collapse-item>
+                    <el-collapse-item title="组件内属性">
+                        <PropsAttr></PropsAttr>
+                    </el-collapse-item>
+                </el-collapse>
             </el-tab-pane>
             <el-tab-pane label="事件"></el-tab-pane>
             <el-tab-pane label="动画"></el-tab-pane>
@@ -13,6 +20,7 @@
 
 <script setup lang="ts">
 import CommonAttr from '@/components/common/CommonAttr.vue';
+import PropsAttr from '@/components/common/PropsAttr.vue';
 import useComponentsStore from '@/store/useComponentStore';
 
 const componentsStore = useComponentsStore();

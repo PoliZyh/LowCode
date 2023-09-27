@@ -37,6 +37,22 @@
         <div class="ops-item">
             <el-button @click="isShowDialog = true">个性化设置</el-button>
         </div>
+        <div class="ops-item">
+            <el-dropdown>
+                <el-button class="el-dropdown-link">
+                    导出UI
+                    <el-icon class="el-icon--right">
+                        <arrow-down />
+                    </el-icon>
+                </el-button>
+                <template #dropdown>
+                <el-dropdown-menu>
+                    <el-dropdown-item @click="handleDownloadUI('cur')">当前路由</el-dropdown-item>
+                    <el-dropdown-item @click="handleDownloadUI('all')">全部路由</el-dropdown-item>
+                </el-dropdown-menu>
+                </template>
+            </el-dropdown>
+        </div>
     </div>
 
     <PersonalDialog v-model:isShow="isShowDialog"></PersonalDialog>
@@ -56,7 +72,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage } from 'element-plus';
 import $bus from '@/utils/bus';
-
+import { ArrowDown } from '@element-plus/icons-vue'
 
 const snapshotStore = useSnapshotStore();
 const componentsStore = useComponentsStore();
@@ -102,6 +118,11 @@ const handlePreview = () => {
     $bus.emit('showPreview', { isShow: true })
 }
 
+// 下载UI按钮的回调
+const handleDownloadUI = (type: 'all' | 'cur') => {
+    $bus.emit('downloadUI', {type})
+}
+
 </script>
 
 
@@ -114,5 +135,10 @@ const handlePreview = () => {
     align-items: center;
     gap: 10px;
     border-bottom: 1px solid var(--border-c-deep);
+}
+.example-showcase .el-dropdown-link {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 </style>

@@ -29,13 +29,13 @@ export const componentList: Array<ICustomeComponent> = [
         componentName: 'MText',
         type: 'e',
         label: '文本',
-        propValue: '文字',
+        propValue: '双击编辑文字',
         animations: [],
         events: [],
         style: {
             ...commonAttr,
-            width: 100,
-            height: 34,
+            width: 210,
+            height: 24,
             backgroundColor: 'transparent',
             textAlign: 'left'
         }

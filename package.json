@@ -12,6 +12,7 @@
     "@kangc/v-md-editor": "^2.3.17",
     "ant-design-vue": "^4.0.1",
     "element-plus": "^2.3.9",
+    "html2canvas": "^1.4.1",
     "less": "^4.2.0",
     "less-loader": "^11.1.3",
     "mitt": "^3.0.1",

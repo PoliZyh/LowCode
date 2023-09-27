@@ -37,5 +37,10 @@ const props = defineProps<{
     button {
        border-style: solid;
     }
+    button:hover {
+        background-color: #ecf5ff !important;
+        color: #409eff !important;
+        border-color: #a0cfff !important;
+    }
 }
 </style>
