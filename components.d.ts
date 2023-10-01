@@ -30,6 +30,8 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     Header: typeof import('./src/components/layout/Header/index.vue')['default']
+    Loading: typeof import('./src/components/common/Loading/index.vue')['default']
+    Loding: typeof import('./src/components/common/Loding/index.vue')['default']
     MButton: typeof import('./src/components/custome-components/MButton/index.vue')['default']
     MImage: typeof import('./src/components/custome-components/MImage/index.vue')['default']
     MText: typeof import('./src/components/custome-components/MText/index.vue')['default']

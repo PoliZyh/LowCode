@@ -32,6 +32,7 @@ import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import $bus from '@/utils/bus'
 import { ref, onUnmounted, nextTick } from 'vue';
 import { downloadPicture } from '@/utils/html2png';
+import loading from '@/components/common/Loading/loading'
 
 const componentStore = useComponentsStore()
 const isShow = ref<boolean>(false)
@@ -42,6 +43,7 @@ $bus.on('showPreview', (show: any) => {
 })
 
 $bus.on('downloadUI', async (type: any) => {
+    loading.startLoding()
     isShow.value = true
     await nextTick()
     const downLoadType = type.type as 'all' | 'cur'
@@ -49,6 +51,7 @@ $bus.on('downloadUI', async (type: any) => {
         await downloadPicture(downloadDomRef.value)
     }
     isShow.value = false
+    loading.endLoding()
 })
 
 onUnmounted(() => {
