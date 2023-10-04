@@ -30,6 +30,8 @@ import IntroductionThanks from './docs/introduction_thanks.md?raw'
 import IntroductionAuthor from './docs/introduction_author.md?raw'
 import IntroductionPlateform from './docs/introduction_plateform.md?raw'
 import TechnologyComponentDesign from './docs/technology_component-design.md?raw'
+import FuncComponent from './docs/component_func.md?raw'
+import { useRoute, useRouter } from 'vue-router';
 
 const docData: IDocItem[] = reactive([
     {
@@ -67,7 +69,7 @@ const docData: IDocItem[] = reactive([
             },
             {
                 title: '组件功能',
-                content: ''
+                content: FuncComponent
             },
             {
                 title: '敬请期待',
@@ -78,14 +80,32 @@ const docData: IDocItem[] = reactive([
 ])
 const activeTitle = ref('')
 const activeContent = ref('')
-
+const router = useRouter()
+const route = useRoute()
 onMounted(() => {
-    handleClickTitle(docData[0].children[0])
+    if (Object.keys(route.query).length > 0) {
+        const query = route.query
+        docData.forEach(item => {
+            const filterItem = item.children.find(child => child.title === query.title)
+            if (filterItem) {
+                activeTitle.value = filterItem.title
+                activeContent.value = filterItem.content
+            }
+        })
+    } else {
+        handleClickTitle(docData[0].children[0])
+    }
 })
 
 const handleClickTitle = (child: IDocChild) => {
     activeTitle.value = child.title
     activeContent.value = child.content
+    router.push({
+        query: {
+            title: child.title
+        }
+    })
+
 }
 </script>
 
