@@ -22,6 +22,8 @@ import hljs from 'highlight.js';
 
 import directives from './directives'
 
+import 'default-passive-events';
+
 VMdPreview.use(githubTheme, {
   Hljs: hljs,
 });

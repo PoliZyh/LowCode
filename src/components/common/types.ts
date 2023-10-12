@@ -22,7 +22,8 @@ export interface ICommonAttrInputItem {
     inputType: 'text' | 'number' | 'select' | 'colorPicker';
     key: string;
     value: ICommonAttr[keyof ICommonAttr];
-    selectOptions?: Array<ICommonAttrSelectOption>
+    selectOptions?: Array<ICommonAttrSelectOption>;
+    isShow?: boolean;
 }
 
 export interface ICommonAttrSelectOption {

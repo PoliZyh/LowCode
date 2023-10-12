@@ -48,7 +48,7 @@ import useComponentsStore from '@/store/useComponentStore';
 import useSnapshotStore from '@/store/useSnapshotStore';
 import useContextmenuStore from '@/store/useContextmenuStore';
 import { deepCopy } from '@/utils/deepCopy';
-import { componentList } from '@/components/custome-components/component-list';
+import { componentList, shapeList } from '@/components/custome-components/component-list';
 import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import type { ICustomeComponent } from '@/components/custome-components/types';
 import { onMounted, ref, reactive } from 'vue';
@@ -61,6 +61,11 @@ const contextmenuStore = useContextmenuStore();
 const gridBox = ref<HTMLElement | null>(null);
 const contextMenuPos = reactive({ x: 0, y: 0 })
 
+const allComponentList = [
+    ...componentList,
+    ...shapeList
+]
+
 // 松开拖拽的组件事件
 const handleDrop = (e: DragEvent) => {
     // 阻止默认行为
@@ -68,7 +73,7 @@ const handleDrop = (e: DragEvent) => {
     e.stopPropagation();
     // 根据索引拿到组件的默认数据，修改x、y坐标，提交到Store中
     const index = Number(e.dataTransfer?.getData('index')) || 0
-    let component: ICustomeComponent = deepCopy(componentList[index])
+    let component: ICustomeComponent = deepCopy(allComponentList[index])
     // 计算鼠标松开时，距离画布左侧和上侧的距离e.offset，并修改component
     component.style.top = e.clientY - 76
     component.style.left = e.clientX - 210

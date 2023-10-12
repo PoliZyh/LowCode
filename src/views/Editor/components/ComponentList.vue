@@ -17,7 +17,16 @@
             </el-collapse-item>
 
             <el-collapse-item title="基础形状">
-
+                <div class="row">
+                    <div class="component-item"
+                    v-for="(item, index) in shapeList"
+                    :key="item.componentName"
+                    :data-index="index + componentList.length"
+                    draggable="true"
+                    @dragstart="handleDragStart">
+                    {{ item.label }}
+                    </div>
+                </div>
             </el-collapse-item>
 
         </el-collapse>
@@ -27,7 +36,7 @@
 
 
 <script setup lang="ts">
-import { componentList } from '@/components/custome-components/component-list';
+import { componentList, shapeList } from '@/components/custome-components/component-list';
 import { ElMessage } from 'element-plus';
 
 const handleDragStart = (e: DragEvent) => {

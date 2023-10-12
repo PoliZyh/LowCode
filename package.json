@@ -11,6 +11,7 @@
   "dependencies": {
     "@kangc/v-md-editor": "^2.3.17",
     "ant-design-vue": "^4.0.1",
+    "default-passive-events": "^2.0.0",
     "element-plus": "^2.3.9",
     "html2canvas": "^1.4.1",
     "less": "^4.2.0",

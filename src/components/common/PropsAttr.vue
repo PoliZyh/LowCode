@@ -2,7 +2,7 @@
     <div class="props-attr-box">
         <template v-if="componentsStore.curActiveComponent">
             <!-- 对于字符串属性 -->
-            <template v-if="typeof componentsStore.curActiveComponent.propValue === 'string'">
+            <template v-if="typeof componentsStore.curActiveComponent.propValue === 'string' && componentsStore.curActiveComponent.propValue !== ''">
                 <div class="content-box">
                     <span>内容</span>
                     <el-input type="textarea" v-model="componentsStore.curActiveComponent.propValue"></el-input>

@@ -31,11 +31,30 @@ export const getCustomeComponentStyle = (componentStyle: ICustomeStyle) => {
         }
     }
 
+    // 设置某些组件自定义的属性
+    setCustomeComponentStyle(componentStyle, result)
+
     // 清除位置信息，避免与shape冲突
     clearPosition(result)
 
     return result
 }
+
+// 设置自定义的样式
+export const setCustomeComponentStyle = (componentStyle: ICustomeStyle, result: IComponentResult) => {
+    // 如果有半径
+    if (componentStyle.radius) {
+        result['width'] = `${componentStyle.radius}px`
+        result['height'] = `${componentStyle.radius}px`
+        componentStyle.width = componentStyle.radius
+        componentStyle.height = componentStyle.radius
+    }
+    // 解决bug：边框问题
+    if (componentStyle.borderWidth && componentStyle.borderColor && componentStyle.borderWidth > 0) {
+        result['border'] = `${componentStyle.borderWidth}px solid ${componentStyle.borderColor}`
+    }
+}
+
 
 
 // 计算Shape组件的样式
@@ -56,6 +75,7 @@ export const getShapeStyle = (componentStyle: ICustomeStyle) => {
 const styleInputMap: {
     [key: string]: string
 } = {
+    radius: '半径',
     left: 'X 坐标',
     top: 'Y 坐标',
     width: '宽度',
@@ -101,6 +121,12 @@ export const getCommonAttrInputStyle = (componentStyle: ICustomeStyle): Array<IC
         if (componentStyle[key] === null) {
             continue
         }
+        // ! --自定义特殊属性
+        // * 圆形组件
+        if (componentStyle.radius && (['width', 'height'].includes(key))) {
+            continue
+        }
+        // ! --end
         let type: 'text' | 'number' | 'colorPicker' | 'select' = 'number'
         const selectOptions: Array<ICommonAttrSelectOption> = []
         if (/color/.test(key.toLowerCase())) {

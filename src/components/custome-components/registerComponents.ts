@@ -1,13 +1,20 @@
 import MButton from './MButton/index.vue';
 import MText from './MText/index.vue';
+import MRectangle from './MRectangle/index.vue'
+import MCircle from './MCircle/index.vue'
 
 interface IRegisterComponents {
     [key: string]: any
 }
 
 const components: IRegisterComponents = {
-    'MButton': MButton,
-    'MText': MText
+    // 基础组件
+     MButton,
+     MText,
+
+    // 形状组件
+    MRectangle,
+    MCircle
 }
 
 

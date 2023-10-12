@@ -9,8 +9,14 @@ export interface ICustomeEvent {
     eventCode?: string;
 }
 
+
+// export type ICustomeStyle = {
+//     [K in keyof ICommonAttr]: ICommonAttr[K];
+// } & ICommonAttr;
+
 export interface ICustomeStyle extends ICommonAttr {
     [key: string]: any;
+    radius?: number | null;
 }
 
 export interface ICustomeComponent {

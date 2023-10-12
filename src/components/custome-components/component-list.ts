@@ -41,3 +41,48 @@ export const componentList: Array<ICustomeComponent> = [
         }
     }
 ]
+
+
+// * 形状列表
+export const shapeList: Array<ICustomeComponent> = [
+    {
+        componentName: 'MRectangle',
+        type: 'e',
+        label: '矩形',
+        propValue: '',
+        animations: [],
+        events: [],
+        style: {
+            ...commonAttr,
+            width: 300,
+            height: 200,
+            backgroundColor: '#E6E6E6',
+            textAlign: null,
+            fontSize: null,
+            lineHeight: null,
+            letterSpacing: null,
+            color: null,
+        }
+    },
+    {
+        componentName: 'MCircle',
+        type: 'e',
+        label: '圆形',
+        propValue: '',
+        animations: [],
+        events: [],
+        style: {
+            ...commonAttr,
+            width: 300,
+            height: 300,
+            backgroundColor: '#E6E6E6',
+            textAlign: null,
+            fontSize: null,
+            lineHeight: null,
+            letterSpacing: null,
+            color: null,
+            radius: 300,
+            borderRadius: 150
+        }
+    }
+]
