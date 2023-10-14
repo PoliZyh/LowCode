@@ -88,7 +88,10 @@ const handleClickRevoke = () => {
 const handleClear = () => {
     componentsStore.setCurComponents([]);
     componentsStore.setActiveComponent(null)
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '清空',
+        value: '全部'
+    })
 }
 
 const handleSave = () => {

@@ -22,6 +22,7 @@ import useContextmenuStore from '@/store/useContextmenuStore';
 import useComponentsStore from '@/store/useComponentStore';
 import useSnapshotStore from '@/store/useSnapshotStore';
 
+
 const contextmenuStore = useContextmenuStore()
 const componentsStore = useComponentsStore()
 const snapshotStore = useSnapshotStore()
@@ -41,28 +42,40 @@ const style = computed(() => {
 const handleMoveUpOneLayer = () => {
     contextmenuStore.deactiveContextmenu()
     componentsStore.upActiveComponentOneLayer()
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '上移',
+        value: componentsStore.curActiveComponent!.label
+    })
 }
 
 // 下移一层
 const handleMoveDownOneLayer = () => {
     contextmenuStore.deactiveContextmenu()
     componentsStore.downActiveComponentOneLayer()
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '下移',
+        value: componentsStore.curActiveComponent!.label
+    })
 }
 
 // 置顶
 const handleMoveToTop = () => {
     contextmenuStore.deactiveContextmenu()
     componentsStore.upActiveComponentToTop()
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '置顶',
+        value: componentsStore.curActiveComponent!.label
+    })
 }
 
 // 置底
 const handleMoveToBottom = () => {
     contextmenuStore.deactiveContextmenu()
     componentsStore.downActiveComponentToBottom()
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '置底',
+        value: componentsStore.curActiveComponent!.label
+    })
 }
 
 // 复制
@@ -79,7 +92,10 @@ const handlePaste = (e: MouseEvent) => {
     const newY = e.clientY - 76
     contextmenuStore.deactiveContextmenu()
     contextmenuStore.pasteComponent(newX, newY)
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '粘贴',
+        value: componentsStore.curActiveComponent!.label
+    })
 }
 
 // 剪切

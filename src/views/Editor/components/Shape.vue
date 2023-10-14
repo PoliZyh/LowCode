@@ -121,7 +121,10 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
         },{
             left: mouseEvent.clientX,
             top: mouseEvent.clientY
-        }) && snapshotStore.saveSnapshot()
+        }) && snapshotStore.saveSnapshot({
+            event: '移动',
+            value: componentStore.curActiveComponent!.label
+        })
         markLineStore.endMovingMarkLine()
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
@@ -165,7 +168,10 @@ const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
     const up = () => {
         console.log('up')
         isSaved = true
-        isSaved && snapshotStore.saveSnapshot()
+        isSaved && snapshotStore.saveSnapshot({
+            event: '大小',
+            value: componentStore.curActiveComponent!.label
+        })
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
     }
@@ -175,8 +181,12 @@ const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
 
 // 删除组件事件
 const handleDelete = () => {
+    const label = componentStore.curActiveComponent?.label
     componentStore.removeComponent(componentStore.curActiveComponent)
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '删除',
+        value: label as string
+    })
 }
 
 </script>

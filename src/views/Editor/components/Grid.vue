@@ -82,7 +82,10 @@ const handleDrop = (e: DragEvent) => {
     componentStore.setActiveComponent(null)
     componentStore.setActiveComponent(component)
     // 快照
-    snapshotStore.saveSnapshot()
+    snapshotStore.saveSnapshot({
+        event: '新增',
+        value: componentStore.curActiveComponent!.label
+    })
 }
 
 const handleDragOver = (e: DragEvent) => {

@@ -11,6 +11,12 @@ interface ISnapeshotState {
     curSanpShotIndex: number;
     snapeshot: Array<Array<ICustomeComponent>>;
     savedIndex: number;
+    history: Array<IHistoryItem>;
+}
+
+export interface IHistoryItem {
+    event: string;
+    value: string;
 }
 
 const useSnapshotStore = defineStore("snapshot", {
@@ -19,6 +25,7 @@ const useSnapshotStore = defineStore("snapshot", {
         curSanpShotIndex: -1,
         snapeshot: [],
         savedIndex: -1,
+        history: [],
     }),
 
     actions: {
@@ -27,12 +34,13 @@ const useSnapshotStore = defineStore("snapshot", {
          * * 保存快照
          * * 当新增组件、删除组件、修改组件时执行保存快照;
          */
-        saveSnapshot() {
+        saveSnapshot(historyItem: IHistoryItem = { event: '默认', value: '默认' }) {
             const componentsStore = useComponentsStore();
             // 深拷贝避免快照记录被修改
             const newCurComponents = deepCopy(componentsStore.curComponents);
             this.curSanpShotIndex++;
             this.snapeshot[this.curSanpShotIndex] = newCurComponents;
+            this.history.unshift(historyItem)
             console.log('save', this.curSanpShotIndex,componentsStore.curComponents)
         },
 

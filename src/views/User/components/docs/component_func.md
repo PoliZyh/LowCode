@@ -161,7 +161,7 @@ const handleMouseDownOnShape = (e: MouseEvent) => {
         },{
             left: mouseEvent.clientX,
             top: mouseEvent.clientY
-        }) && snapshotStore.saveSnapshot()
+        }) && snapshotStore.()
         markLineStore.endMovingMarkLine()
         document.removeEventListener('mousemove', move)
         document.removeEventListener('mouseup', up)
