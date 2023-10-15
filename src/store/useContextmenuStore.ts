@@ -52,7 +52,20 @@ const useContextmenuStore = defineStore('contextmenu', {
                 activeComponent: ['up', 'down', 'top', 'bottom', 'copy', 'paste', 'cut'],
                 canvas: ['paste']
             }
-            const rights = optionRightMap[opstion as keyof typeof optionRightMap]
+            // 基础权限
+            let rights = optionRightMap[opstion as keyof typeof optionRightMap]
+            // 额外权限
+            if (componentsStore.curActiveComponent?.other) {
+                if (componentsStore.curActiveComponent.other.hasLocked) {
+                    rights = []
+                    rights.push('unlock')
+                } else {
+                    rights.push('lock')
+                }
+            } else {
+                rights.push('lock')
+            }
+
             this.clearRights()
             this.addCurRights(rights)
         },

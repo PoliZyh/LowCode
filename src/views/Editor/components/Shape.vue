@@ -10,10 +10,21 @@
         :key="item"
         :style="getPointStyle(item)"
         @mousedown="handleMouseDownOnPoint($event, item)"
+        v-show="!props.el.other?.hasLocked"
         ></div>
 
+        <!-- 上锁后的mask -->
+        <div class="mask"
+        v-show="props.el.other?.hasLocked"
+        :style="getMaksStyle()"
+        >
+            <el-icon color="grey">
+                <Lock />
+            </el-icon>
+        </div>
+
         <!-- 删除图标 -->
-        <el-icon class="de-icon" v-show="props.isActive" @click="handleDelete">
+        <el-icon class="de-icon" v-show="props.isActive && !props.el.other?.hasLocked" @click="handleDelete">
             <Delete></Delete>
         </el-icon>
 
@@ -75,6 +86,15 @@ const getPointStyle = (point: string) => {
     }
 }
 
+// 处理mask的样式
+const getMaksStyle = () => {
+    const { width, height } = props.el.style
+    return {
+        width: width + 'px',
+        height: height + 'px'
+    }
+}
+
 // 点击组件事件
 const handleClickComponent = (e: Event) => {
     // 点击当前组件时，激活该组件
@@ -86,8 +106,12 @@ const handleIsClickShape = (oldPos: {left: number; top: number;}, newPos: {left:
     return oldPos.left === newPos.left && oldPos.top === newPos.top
 }
 
-// 鼠标点下Shape事件
+// 鼠标点下Shape事件 -> 移动
 const handleMouseDownOnShape = (e: MouseEvent) => {
+    if (props.el.other) {
+        // 上锁后无法移动
+        if (props.el.other.hasLocked) return
+    }
     e.stopPropagation()
     // 激活当前组件
     componentStore.setActiveComponent(props.el)
@@ -213,6 +237,10 @@ const handleDelete = () => {
         right: 0px;
         top: -30px;
         cursor: pointer;
+    }
+    .mask {
+        position: absolute;
+        z-index: 3002;
     }
 }
 .active {

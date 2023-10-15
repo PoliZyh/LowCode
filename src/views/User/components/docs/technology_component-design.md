@@ -22,7 +22,8 @@
     propValue: 'button', // 组件的属性
     animations: [], // 组件的动画（暂未实现）
     events: [], // 组件的事件（暂未实现）
-    style: {} // 组件的样式
+    style: {}, // 组件的样式
+    other: {}, // 用于对组件的扩展
 }
 ```
 

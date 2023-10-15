@@ -28,4 +28,9 @@ export interface ICustomeComponent {
     animations: Array<string>;
     events: Array<ICustomeEvent>;
     style: ICustomeStyle;
+    other?: IOtherProp;
+}
+
+export interface IOtherProp {
+    hasLocked?: boolean;
 }

@@ -91,7 +91,5 @@ onUnmounted(() => {
         }
     }
 }
-.loading {
 
-}
 </style>

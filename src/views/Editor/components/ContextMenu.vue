@@ -10,6 +10,8 @@
             <li @click="handleMoveToBottom()" v-permission="'bottom'">置底</li>
             <li @click="handleCopy()" v-permission="'copy'">复制</li>
             <li @click="handleCut()" v-permission="'cut'">剪切</li>
+            <li @click="handleLock()" v-permission="'lock'">上锁</li>
+            <li @click="handleUnlock()" v-permission="'unlock'">解锁</li>
             <li @click="handlePaste($event)" :class="{'disabled': !contextmenuStore.clipBoard}" v-permission="'paste'">粘贴</li>
         </ul>
     </div>
@@ -103,6 +105,36 @@ const handleCut = () => {
     contextmenuStore.deactiveContextmenu()
     contextmenuStore.cutComponent()
     snapshotStore.saveSnapshot()
+}
+
+// 上锁
+const handleLock = () => {
+    if (componentsStore.curActiveComponent) {
+        componentsStore.curActiveComponent.other = {
+            ...componentsStore.curActiveComponent.other,
+            hasLocked: true
+        }
+    }
+    contextmenuStore.deactiveContextmenu()
+    snapshotStore.saveSnapshot({
+        event: '上锁',
+        value: componentsStore.curActiveComponent!.label
+    })
+}
+
+// 解锁
+const handleUnlock = () => {
+    if (componentsStore.curActiveComponent) {
+        componentsStore.curActiveComponent.other = {
+            ...componentsStore.curActiveComponent.other,
+            hasLocked: false
+        }
+    }
+    contextmenuStore.deactiveContextmenu()
+    snapshotStore.saveSnapshot({
+        event: '解锁',
+        value: componentsStore.curActiveComponent!.label
+    })
 }
 
 </script>
