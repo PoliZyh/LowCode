@@ -24,6 +24,8 @@ import directives from './directives'
 
 import 'default-passive-events';
 
+import "jsoneditor";
+
 VMdPreview.use(githubTheme, {
   Hljs: hljs,
 });

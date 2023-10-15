@@ -53,11 +53,15 @@
                 </template>
             </el-dropdown>
         </div>
+        <div class="ops-item">
+            <el-button @click="handleShowJson">JSON</el-button>
+        </div>
     </div>
 
     <PersonalDialog v-model:isShow="isShowDialog"></PersonalDialog>
     <RouteSaveDialog></RouteSaveDialog>
     <RouteTableDialog v-model:isShow="isShowRouteTableDialog"></RouteTableDialog>
+    <JsonDrawer v-model:isShow="isShowJsonDrawer"></JsonDrawer>
 </template>
 
 <script lang="ts" setup>
@@ -65,6 +69,7 @@
 import PersonalDialog from './PersonalDialog.vue';
 import RouteSaveDialog from './RouteSaveDialog.vue';
 import RouteTableDialog from './RouteTableDialog.vue';
+import JsonDrawer from './JsonDrawer.vue';
 import useSnapshotStore  from '@/store/useSnapshotStore';
 import useComponentsStore from '@/store/useComponentStore';
 import useEditorRoutesStore from '@/store/useEditorRoutesStore';
@@ -80,6 +85,7 @@ const editorRoutesStore = useEditorRoutesStore();
 const router = useRouter();
 const isShowDialog = ref(false);
 const isShowRouteTableDialog = ref(false);
+const isShowJsonDrawer = ref(false)
 
 const handleClickRevoke = () => {
     snapshotStore.revoke();
@@ -92,6 +98,10 @@ const handleClear = () => {
         event: '清空',
         value: '全部'
     })
+}
+
+const handleShowJson = () => {
+    isShowJsonDrawer.value = true
 }
 
 const handleSave = () => {
