@@ -28,6 +28,8 @@
         <!-- 预览组件 -->
         <Preview></Preview>
 
+        <GridBackground></GridBackground>
+
     </div>
 
     <!-- 右键弹窗 -->
@@ -44,6 +46,7 @@
 import Shape from './Shape.vue';
 import ContextMenu from './ContextMenu.vue'
 import MarkLine from './MarkLine.vue'
+import GridBackground from './GridBackground.vue';
 import useComponentsStore from '@/store/useComponentStore';
 import useSnapshotStore from '@/store/useSnapshotStore';
 import useContextmenuStore from '@/store/useContextmenuStore';
