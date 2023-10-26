@@ -122,7 +122,7 @@ onMounted(() => {
     width: 100%;
     background-color: white;
     position: relative;
-
+    z-index: 0;
 }
 
 </style>

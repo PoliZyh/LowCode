@@ -40,10 +40,16 @@
     </svg>
 </template>
 
+
+<script setup lang="ts">
+
+</script>
+
 <style lang="less" scoped>
 .grid-bg {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
 }
 </style>
