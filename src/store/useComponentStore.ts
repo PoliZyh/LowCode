@@ -26,9 +26,10 @@ const useComponentsStore = defineStore('components', {
         removeComponent(component: ICustomeComponent | null) {
             if (component) {
                 const index = this.curComponents.indexOf(component);
-                this.curComponents.splice(index, 1);
                 this.curActiveComponent = null
+                this.curComponents.splice(index, 1);
             }
+            console.log(this.curComponents)
         },
 
         // 设置当前激活的组件

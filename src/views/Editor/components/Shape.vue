@@ -204,7 +204,8 @@ const handleMouseDownOnPoint = (e: MouseEvent, point: string) => {
 }
 
 // 删除组件事件
-const handleDelete = () => {
+const handleDelete = (e: Event) => {
+    e.stopPropagation()
     const label = componentStore.curActiveComponent?.label
     componentStore.removeComponent(componentStore.curActiveComponent)
     snapshotStore.saveSnapshot({
