@@ -4,7 +4,7 @@
             <el-tab-pane label="属性">
                 <el-collapse>
                     <el-collapse-item title="通用属性">
-                        <CommonAttr />
+                        <CommonAttr ></CommonAttr>
                     </el-collapse-item>
                     <el-collapse-item title="组件内属性">
                         <PropsAttr></PropsAttr>
@@ -14,20 +14,23 @@
             <el-tab-pane label="事件"></el-tab-pane>
             <el-tab-pane label="动画"></el-tab-pane>
         </el-tabs>
-        <h3 v-show="!isShow">请先激活组件哦</h3>
+        <!-- <h3 v-show="!isShow">请先激活组件哦</h3> -->
+        <div class="attr-canvas" v-show="!isShow">
+            <CanvasAttr></CanvasAttr>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import CommonAttr from '@/components/common/CommonAttr.vue';
 import PropsAttr from '@/components/common/PropsAttr.vue';
+import CanvasAttr from '@/components/common/CanvasAttr.vue';
 import useComponentsStore from '@/store/useComponentStore';
 import { computed } from 'vue';
 
 const componentsStore = useComponentsStore();
 
 const isShow = computed(() => {
-    console.log(1)
     return componentsStore.curActiveComponent !== null
 })
 </script>
@@ -49,6 +52,10 @@ const isShow = computed(() => {
         align-items: center;
         color: grey;
         font-weight: 400;
+    }
+    .attr-canvas {
+        width: 100%;
+        height: 100%;
     }
 }
 </style>

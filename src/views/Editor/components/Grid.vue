@@ -4,6 +4,7 @@
     @drop="handleDrop"
     @dragover="handleDragOver"
     @click="handleClickGrid"
+    :style="gridStyle"
     >
 
         <!-- 渲染画布上的组件 -->
@@ -54,20 +55,36 @@ import { deepCopy } from '@/utils/deepCopy';
 import { componentList, shapeList } from '@/components/custome-components/component-list';
 import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import type { ICustomeComponent } from '@/components/custome-components/types';
-import { onMounted, ref, reactive } from 'vue';
+import type { ICanvasAttr } from '@/components/common/types';
+import { onMounted, ref, reactive, computed, onUnmounted } from 'vue';
 import Preview from './Preview.vue';
+import $bus from '@/utils/bus';
 
 const componentStore = useComponentsStore();
 const snapshotStore = useSnapshotStore();
 const contextmenuStore = useContextmenuStore();
+const canvasParams = ref<ICanvasAttr>({
+    transparency: 1,
+    backgroundColor: '#ffffff'
+})
 
 const gridBox = ref<HTMLElement | null>(null);
 const contextMenuPos = reactive({ x: 0, y: 0 })
+const gridStyle = computed(() => {
+    return {
+        backgroundColor: canvasParams.value.backgroundColor,
+        opacity: canvasParams.value.transparency
+    }
+})
 
 const allComponentList = [
     ...componentList,
     ...shapeList
 ]
+
+$bus.on('update:CanvasAttr', (data: any) => {
+    canvasParams.value = data as ICanvasAttr
+})
 
 // 松开拖拽的组件事件
 const handleDrop = (e: DragEvent) => {
@@ -113,6 +130,10 @@ onMounted(() => {
     }
 })
 
+onUnmounted(() => {
+    $bus.off('*')
+})
+
 </script>
 
 
@@ -120,7 +141,7 @@ onMounted(() => {
 .grid-box {
     height: 100%;
     width: 100%;
-    background-color: white;
+    // background-color: white;
     position: relative;
     z-index: 0;
 }

@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Attr: typeof import('./src/components/custome-components/MButton/Attr.vue')['default']
+    CanvasAttr: typeof import('./src/components/common/CanvasAttr.vue')['default']
     CommonAttr: typeof import('./src/components/common/CommonAttr.vue')['default']
     ComponentBackgroundDots: typeof import('./src/components/Login/ComponentBackgroundDots.vue')['default']
     Editor: typeof import('./src/components/common/Editor/index.vue')['default']
@@ -20,6 +21,8 @@ declare module 'vue' {
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
     ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElOption: typeof import('element-plus/es')['ElOption']

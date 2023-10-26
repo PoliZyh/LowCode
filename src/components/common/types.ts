@@ -30,3 +30,9 @@ export interface ICommonAttrSelectOption {
     label: string;
     value: string;
 }
+
+
+export interface ICanvasAttr {
+    transparency: number;
+    backgroundColor: string;
+}
