@@ -28,13 +28,17 @@
 
 <script setup lang="ts">
 import useComponentsStore from '@/store/useComponentStore';
+import useEditorRoutesStore from '@/store/useEditorRoutesStore';
 import { getCustomeComponentStyle, getShapeStyle } from '@/utils/style';
 import $bus from '@/utils/bus'
 import { ref, onUnmounted, nextTick } from 'vue';
 import { downloadPicture } from '@/utils/html2png';
 import loading from '@/components/common/Loading/loading'
+import type { ICustomeComponent } from "@/components/custome-components/types";
+
 
 const componentStore = useComponentsStore()
+const editorRoutesStore = useEditorRoutesStore()
 const isShow = ref<boolean>(false)
 const downloadDomRef = ref<HTMLDivElement>()
 
@@ -49,6 +53,16 @@ $bus.on('downloadUI', async (type: any) => {
     const downLoadType = type.type as 'all' | 'cur'
     if (downLoadType === 'cur') {
         await downloadPicture(downloadDomRef.value)
+    } else if (downLoadType == 'all') {
+        // 遍历历史路由并设置为当前路由，随后再更改回来
+        let routeKey: string;
+        const curRouteComponent: ICustomeComponent[] = componentStore.curComponents;
+        console.log(curRouteComponent)
+        for(routeKey in editorRoutesStore.routesMap) {
+            componentStore.setCurComponentsWithoutDeepCopy(editorRoutesStore.routesMap[routeKey].components)
+            await downloadPicture(downloadDomRef.value)
+        }
+        componentStore.setCurComponentsWithoutDeepCopy(curRouteComponent)
     }
     isShow.value = false
     loading.endLoding()

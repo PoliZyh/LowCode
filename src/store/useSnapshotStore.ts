@@ -42,6 +42,11 @@ const useSnapshotStore = defineStore("snapshot", {
             this.snapeshot[this.curSanpShotIndex] = newCurComponents;
             this.history.unshift(historyItem)
             console.log('save', this.curSanpShotIndex,componentsStore.curComponents)
+            console.log(this.curSanpShotIndex, this.savedIndex)
+        },
+
+        setSavedIndex(index: number) {
+            this.savedIndex = index
         },
 
         /**

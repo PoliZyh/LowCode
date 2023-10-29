@@ -22,7 +22,6 @@ import useEditorRoutesStore from '@/store/useEditorRoutesStore';
 import useSnapshotStore from '@/store/useSnapshotStore';
 import useComponentsStore from '@/store/useComponentStore';
 import { computed } from 'vue';
-import { deepCopy } from '@/utils/deepCopy';
 import { ElMessage } from 'element-plus';
 
 const editorRoutesStore = useEditorRoutesStore()
@@ -57,9 +56,12 @@ const handleDoubleClickRow = (row: {route: string, pageName: string, date: strin
     // 重新赋值curComponents
     componentsStore.$reset()
     snapshotStore.$reset()
+    // 解决bug
+    snapshotStore.setSavedIndex(0)
     editorRoutesStore.setCurRouteInfo(row.route, row.pageName)
-    const routeComponents = deepCopy(editorRoutesStore.routesMap[row.route].components)
-    componentsStore.setCurComponents(routeComponents)
+    const routeComponents = editorRoutesStore.routesMap[row.route].components
+    componentsStore.setCurComponentsWithoutDeepCopy(routeComponents)
+    snapshotStore.saveSnapshot()
     emit('update:isShow', false)
     ElMessage.success('路由成功')
 }

@@ -52,6 +52,11 @@ const useComponentsStore = defineStore('components', {
             this.curComponents = [...components];
         },
 
+        // 设置当前面板上渲染的组件没有深拷贝
+        setCurComponentsWithoutDeepCopy(components: ICustomeComponent[]) {
+            this.curComponents = components;
+        },
+
         // 获取当前激活的组件的索引
         getActiveComponentIndex() {
             if (this.curActiveComponent) {
