@@ -3,19 +3,26 @@
         <div class="preview-box" v-show="isShow" >
             <el-button class="back" @click="isShow=false">返回</el-button>
             <div class="pad" ref="downloadDomRef">
-                <div
-                    v-for="(item, index) in componentStore.curComponents"
-                    :key="item.componentName"
-                    :style="getShapeStyle(item.style)"
-                    class="container"
-                    >
-                    <component
-                    :is="item.componentName"
-                    :propValue="item.propValue"
-                    :component-style="getCustomeComponentStyle(item.style)"
-                    :zIndex="index"
-                    ></component>
+                <div class="preview-canvas"
+                :style="{
+                    height: canvasStyle.height + 'px',
+                    width: canvasStyle.width + 'px'
+                }">
+                    <div
+                        v-for="(item, index) in componentStore.curComponents"
+                        :key="item.componentName"
+                        :style="getShapeStyle(item.style)"
+                        class="container"
+                        >
+                        <component
+                        :is="item.componentName"
+                        :propValue="item.propValue"
+                        :component-style="getCustomeComponentStyle(item.style)"
+                        :zIndex="index"
+                        ></component>
+                    </div>
                 </div>
+
             </div>
         </div>
     </Teleport>
@@ -35,15 +42,28 @@ import { ref, onUnmounted, nextTick } from 'vue';
 import { downloadPicture } from '@/utils/html2png';
 import loading from '@/components/common/Loading/loading'
 import type { ICustomeComponent } from "@/components/custome-components/types";
+import type { ICanvasAttr } from '@/components/common/types';
 
 
 const componentStore = useComponentsStore()
 const editorRoutesStore = useEditorRoutesStore()
 const isShow = ref<boolean>(false)
 const downloadDomRef = ref<HTMLDivElement>()
+const canvasStyle = ref({
+    width: 1200,
+    height: 740
+})
 
 $bus.on('showPreview', (show: any) => {
     isShow.value = show.isShow as boolean
+})
+
+$bus.on('update:CanvasAttr', (data: any) => {
+    const canvasParams = data as ICanvasAttr
+    canvasStyle.value = {
+        width: canvasParams.width,
+        height: canvasParams.height
+    }
 })
 
 $bus.on('downloadUI', async (type: any) => {
@@ -99,7 +119,11 @@ onUnmounted(() => {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        overflow: scroll;
         background-color: white;
+        .preview-canvas {
+            position: relative;
+        }
         .container {
             position: absolute;
         }

@@ -66,8 +66,8 @@ const contextmenuStore = useContextmenuStore();
 const canvasParams = ref<ICanvasAttr>({
     transparency: 1,
     backgroundColor: '#ffffff',
-    height: 1200,
-    width: 740
+    height: 740,
+    width: 1200
 })
 
 const gridBox = ref<HTMLElement | null>(null);
@@ -76,8 +76,8 @@ const gridStyle = computed(() => {
     return {
         backgroundColor: canvasParams.value.backgroundColor,
         opacity: canvasParams.value.transparency,
-        height: canvasParams.value.width + 'px',
-        width: canvasParams.value.height + 'px'
+        height: canvasParams.value.height + 'px',
+        width: canvasParams.value.width + 'px'
     }
 })
 
