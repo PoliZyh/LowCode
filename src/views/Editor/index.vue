@@ -12,7 +12,9 @@
             </div>
 
             <div class="main-item center">
-                <Grid></Grid>
+                <div class="center-pad">
+                    <Grid></Grid>
+                </div>
             </div>
 
             <div class="main-item right">
@@ -56,6 +58,11 @@ import AttrList from "./components/AttrList.vue";
             margin-right: 288px;
             padding: 10px;
             background-color: rgb(239, 239, 239);
+            .center-pad {
+                width: 100%;
+                height: 100%;
+                overflow: scroll;
+            }
         }
         .right {
             position: absolute;

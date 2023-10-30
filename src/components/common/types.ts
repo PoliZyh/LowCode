@@ -35,4 +35,6 @@ export interface ICommonAttrSelectOption {
 export interface ICanvasAttr {
     transparency: number;
     backgroundColor: string;
+    width: number;
+    height: number;
 }

@@ -8,6 +8,17 @@
             <el-form-item label="背景色">
                 <el-color-picker v-model="canvasParams.backgroundColor" />
             </el-form-item>
+            <el-form-item label="大小">
+                <el-row style="width: 100%;">
+                    <el-col :span="6">
+                        <el-input size="small" v-model="canvasParams.height"></el-input>
+                    </el-col>
+                    <el-col :span="2" style="display: flex;justify-content: center;">*</el-col>
+                    <el-col :span="6">
+                        <el-input size="small" v-model="canvasParams.width"></el-input>
+                    </el-col>
+                </el-row>
+            </el-form-item>
         </el-form>
     </div>
 </template>
@@ -20,7 +31,9 @@ import $bus from '@/utils/bus';
 
 const canvasParams = ref<ICanvasAttr>({
     transparency: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    width: 740,
+    height: 1200
 })
 
 watch(

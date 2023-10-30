@@ -65,7 +65,9 @@ const snapshotStore = useSnapshotStore();
 const contextmenuStore = useContextmenuStore();
 const canvasParams = ref<ICanvasAttr>({
     transparency: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    height: 1200,
+    width: 740
 })
 
 const gridBox = ref<HTMLElement | null>(null);
@@ -73,7 +75,9 @@ const contextMenuPos = reactive({ x: 0, y: 0 })
 const gridStyle = computed(() => {
     return {
         backgroundColor: canvasParams.value.backgroundColor,
-        opacity: canvasParams.value.transparency
+        opacity: canvasParams.value.transparency,
+        height: canvasParams.value.width + 'px',
+        width: canvasParams.value.height + 'px'
     }
 })
 
@@ -95,8 +99,8 @@ const handleDrop = (e: DragEvent) => {
     const index = Number(e.dataTransfer?.getData('index')) || 0
     let component: ICustomeComponent = deepCopy(allComponentList[index])
     // 计算鼠标松开时，距离画布左侧和上侧的距离e.offset，并修改component
-    component.style.top = e.clientY - 76
-    component.style.left = e.clientX - 210
+    component.style.top = e.offsetY
+    component.style.left = e.offsetX
     componentStore.addComponent(component)
     // 设置当前激活的组件
     componentStore.setActiveComponent(null)
@@ -139,8 +143,7 @@ onUnmounted(() => {
 
 <style scoped lang="less">
 .grid-box {
-    height: 100%;
-    width: 100%;
+
     // background-color: white;
     position: relative;
     z-index: 0;
