@@ -67,7 +67,8 @@ const canvasParams = ref<ICanvasAttr>({
     transparency: 1,
     backgroundColor: '#ffffff',
     height: 740,
-    width: 1200
+    width: 1200,
+    scale: 100
 })
 
 const gridBox = ref<HTMLElement | null>(null);
@@ -77,7 +78,8 @@ const gridStyle = computed(() => {
         backgroundColor: canvasParams.value.backgroundColor,
         opacity: canvasParams.value.transparency,
         height: canvasParams.value.height + 'px',
-        width: canvasParams.value.width + 'px'
+        width: canvasParams.value.width + 'px',
+        scale: canvasParams.value.scale / 100
     }
 })
 
@@ -147,6 +149,7 @@ onUnmounted(() => {
     // background-color: white;
     position: relative;
     z-index: 0;
+    transform-origin: top left;
 }
 
 </style>

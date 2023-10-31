@@ -37,4 +37,5 @@ export interface ICanvasAttr {
     backgroundColor: string;
     width: number;
     height: number;
+    scale: number;
 }

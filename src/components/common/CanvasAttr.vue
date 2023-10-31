@@ -19,6 +19,14 @@
                     </el-col>
                 </el-row>
             </el-form-item>
+            <el-form-item label="画布比例">
+                <el-row style="width: 100%;">
+                    <el-col :span="6">
+                        <el-input size="small" v-model="canvasParams.scale"></el-input>
+                    </el-col>
+                    %
+                </el-row>
+            </el-form-item>
         </el-form>
     </div>
 </template>
@@ -33,7 +41,8 @@ const canvasParams = ref<ICanvasAttr>({
     transparency: 1,
     backgroundColor: '#ffffff',
     width: 1200,
-    height: 740
+    height: 740,
+    scale: 100,
 })
 
 watch(
