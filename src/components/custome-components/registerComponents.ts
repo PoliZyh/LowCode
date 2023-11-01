@@ -2,6 +2,7 @@ import MButton from './MButton/index.vue';
 import MText from './MText/index.vue';
 import MRectangle from './MRectangle/index.vue'
 import MCircle from './MCircle/index.vue'
+import MTable from './MTable/index.vue'
 
 interface IRegisterComponents {
     [key: string]: any
@@ -11,6 +12,7 @@ const components: IRegisterComponents = {
     // 基础组件
      MButton,
      MText,
+     MTable,
 
     // 形状组件
     MRectangle,

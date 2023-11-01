@@ -7,7 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Attr: typeof import('./src/components/custome-components/MButton/Attr.vue')['default']
+    Attr: typeof import('./src/components/custome-components/MTable/Attr.vue')['default']
     CanvasAttr: typeof import('./src/components/common/CanvasAttr.vue')['default']
     CommonAttr: typeof import('./src/components/common/CommonAttr.vue')['default']
     ComponentBackgroundDots: typeof import('./src/components/Login/ComponentBackgroundDots.vue')['default']
@@ -27,6 +27,7 @@ declare module 'vue' {
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElOption: typeof import('element-plus/es')['ElOption']
+    ElPopover: typeof import('element-plus/es')['ElPopover']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
@@ -43,6 +44,7 @@ declare module 'vue' {
     MCircle: typeof import('./src/components/custome-components/MCircle/index.vue')['default']
     MImage: typeof import('./src/components/custome-components/MImage/index.vue')['default']
     MRectangle: typeof import('./src/components/custome-components/MRectangle/index.vue')['default']
+    MTable: typeof import('./src/components/custome-components/MTable/index.vue')['default']
     MText: typeof import('./src/components/custome-components/MText/index.vue')['default']
     PropsAttr: typeof import('./src/components/common/PropsAttr.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

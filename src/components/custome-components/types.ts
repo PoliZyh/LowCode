@@ -1,7 +1,9 @@
 
-import {
+import type{
     ICommonAttr
 } from "@/components/common/types"
+
+import type { IMTableAttr } from "./MTable/type";
 
 export interface ICustomeEvent {
     eventName: string;
@@ -23,7 +25,7 @@ export interface ICustomeComponent {
     componentName: string;
     type?: 'e' | 'a' | 'm';
     label: string;
-    propValue: Array<string> | string;
+    propValue: Array<string> | string | IMTableAttr;
     icon?: string;
     animations: Array<string>;
     events: Array<ICustomeEvent>;

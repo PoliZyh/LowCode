@@ -90,7 +90,9 @@ const handleDragStart = (e: DragEvent) => {
     }
     .row {
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 15px;
         .component-item {
             height: fit-content;
             padding: 7px 15px;

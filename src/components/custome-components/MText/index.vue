@@ -13,7 +13,7 @@
             <textarea type="text"
             :style="props.componentStyle"
             v-show="isEdit"
-            v-model="componentsStore.curActiveComponent.propValue"
+            v-model="(componentsStore.curActiveComponent.propValue as string)"
             @blur="handleToView"
             class="edit">
             </textarea>

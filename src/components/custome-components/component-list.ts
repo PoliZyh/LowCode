@@ -39,6 +39,44 @@ export const componentList: Array<ICustomeComponent> = [
             backgroundColor: 'transparent',
             textAlign: 'left'
         }
+    },
+    {
+        componentName: 'MTable',
+        type: 'e',
+        label: '表格',
+        propValue: {
+            tableTitle: [
+                {
+                    propName: 'prop1',
+                    titleName: '属性1'
+                },
+                {
+                    propName: 'prop2',
+                    titleName: '属性2'
+                },
+                {
+                    propName: 'prop3',
+                    titleName: '属性3'
+                }
+            ],
+            tableData: [
+                { prop1: 123, prop2: 233, prop3: 12312 },
+                { prop1: 'abc', prop2: 'def', prop3: 'c' },
+            ],
+            isTitleBold: false,
+            hasZebraStripe: false,
+        },
+        animations: [],
+        events: [],
+        style: {
+            ...commonAttr,
+            width: 310,
+            height: 224,
+            backgroundColor: '#ffffff',
+            textAlign: 'center',
+            borderRadius: null,
+            borderColor: '#ffffff',
+        }
     }
 ]
 
