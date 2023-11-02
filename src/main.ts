@@ -44,4 +44,7 @@ registerComponents(app)
 
 app.use(pinia).use(router).use(Antd).use(VMdPreview).use(directives)
 
+
+import './router/permission'
+
 app.mount('#app')

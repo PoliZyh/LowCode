@@ -22,6 +22,10 @@
                     </div>
                 </el-collapse-item>
 
+                <el-collapse-item title="表单组件">
+
+                </el-collapse-item>
+
                 <el-collapse-item title="基础形状">
                     <div class="row">
                         <div class="component-item"
@@ -37,6 +41,8 @@
                         </div>
                     </div>
                 </el-collapse-item>
+
+
 
             </el-collapse>
         </div>
