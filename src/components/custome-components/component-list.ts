@@ -77,7 +77,32 @@ export const componentList: Array<ICustomeComponent> = [
             borderRadius: null,
             borderColor: '#ffffff',
         }
-    }
+    },
+    {
+        componentName: 'MImage',
+        type: 'e',
+        label: '图片',
+        propValue: {
+            isHorizontalFlip: false,
+            isVerticalFlip: false,
+            url: 'https://i.postimg.cc/Znt1jWYF/user.jpg'
+        },
+        animations: [],
+        events: [],
+        style: {
+            ...commonAttr,
+            width: 202,
+            height: 165,
+            backgroundColor: null,
+            textAlign: null,
+            fontSize: null,
+            lineHeight: null,
+            letterSpacing: null,
+            color: null,
+            borderWidth: null,
+            borderColor: null
+        }
+    },
 ]
 
 
