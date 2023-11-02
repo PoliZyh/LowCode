@@ -9,9 +9,15 @@
             <span>{{ props.info.description }}</span>
         </div>
         <div class="card-bottom card-item">
-            <div class="ops-item">
-                <el-icon style="color: rgb(0, 123, 255)"><View /></el-icon>
-            </div>
+            <el-tooltip
+                    class="box-item"
+                    content="路由可视化"
+                    placement="bottom"
+                >
+                <div class="ops-item" @click="handleViewRoutes">
+                    <el-icon style="color: rgb(0, 123, 255)"><View /></el-icon>
+                </div>
+            </el-tooltip>
             <div class="ops-item">
                 <el-icon style="color: red;"><Delete /></el-icon>
             </div>
@@ -35,6 +41,13 @@ const props = defineProps<{
 const handleViewEditor = () => {
     router.push({
         name: 'Editor'
+    })
+}
+
+// 前往路由可视化界面
+const handleViewRoutes = () => {
+    router.push({
+        name: 'RouteVisualization'
     })
 }
 

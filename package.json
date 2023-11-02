@@ -12,6 +12,7 @@
     "@kangc/v-md-editor": "^2.3.17",
     "ant-design-vue": "^4.0.1",
     "default-passive-events": "^2.0.0",
+    "echarts": "^5.4.3",
     "element-plus": "^2.3.9",
     "html2canvas": "^1.4.1",
     "json-editor-vue3": "^1.0.8",

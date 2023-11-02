@@ -34,6 +34,11 @@ const constantRoutes: RouteRecordRaw[] = [
         path: '/editor',
         name: 'Editor',
         component: () => import('@/views/Editor/index.vue'),
+    },
+    {
+        path: '/route-visualization',
+        name: 'RouteVisualization',
+        component: () => import('@/views/RouteVisualization/index.vue')
     }
 
 ]

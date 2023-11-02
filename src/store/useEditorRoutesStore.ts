@@ -2,15 +2,11 @@
 import { defineStore } from 'pinia'
 import type { ICustomeComponent } from '@/components/custome-components/types'
 import { getCurDate } from '@/utils/date'
+import type { IRoutesMap } from './types'
+
 
 interface IEditorRoutesState {
-    routesMap: {
-        [key: string]: {
-            components: ICustomeComponent[];
-            pageName: string;
-            date: string;
-        }
-    },
+    routesMap: IRoutesMap,
     curRoute: string;
     curPageName: string;
     isShowRouteSaveDialog: boolean;
