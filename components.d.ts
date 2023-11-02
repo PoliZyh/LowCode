@@ -7,10 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Attr: typeof import('./src/components/custome-components/MTable/Attr.vue')['default']
+    Attr: typeof import('./src/components/custome-components/MImage/Attr.vue')['default']
     CanvasAttr: typeof import('./src/components/common/CanvasAttr.vue')['default']
     CommonAttr: typeof import('./src/components/common/CommonAttr.vue')['default']
     ComponentBackgroundDots: typeof import('./src/components/Login/ComponentBackgroundDots.vue')['default']
+    ComponentView: typeof import('./src/components/common/ComponentView/index.vue')['default']
     Editor: typeof import('./src/components/common/Editor/index.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']

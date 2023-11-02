@@ -1,6 +1,6 @@
 <template>
     <div class="component-list-box" >
-
+        <ComponentView :top="componentViewTop" :list-index="listIndex"></ComponentView>
         <div class="scroll-box"
         :style="{
             height: isShowHistory ? 'calc(100% - 300px);' : '100%'
@@ -14,6 +14,8 @@
                         :data-index="index"
                         draggable="true"
                         @dragstart="handleDragStart"
+                        @mouseenter="handleMouseEnterComponentItem(index)"
+                        @mouseleave="handleMouseLeaveComponentItem"
                         >
                             {{ item.label }}
                         </div>
@@ -27,7 +29,10 @@
                         :key="item.componentName"
                         :data-index="index + componentList.length"
                         draggable="true"
-                        @dragstart="handleDragStart">
+                        @dragstart="handleDragStart"
+                        @mouseenter="handleMouseEnterComponentItem(index + componentList.length)"
+                        @mouseleave="handleMouseLeaveComponentItem"
+                        >
                         {{ item.label }}
                         </div>
                     </div>
@@ -50,8 +55,11 @@ import { ElMessage } from 'element-plus';
 import History from './History.vue'
 import { onUnmounted, ref } from 'vue';
 import $bus from '@/utils/bus';
+import ComponentView from '@/components/common/ComponentView/index.vue'
 
 const isShowHistory = ref<boolean>(false)
+const componentViewTop = ref<number>(0)
+const listIndex = ref<number>(0)
 
 $bus.on('changeShowHistory', (newVal: any) => {
     isShowHistory.value = newVal as boolean
@@ -62,6 +70,7 @@ onUnmounted(() => {
 })
 
 const handleDragStart = (e: DragEvent) => {
+    $bus.emit('isShowComponentView', false)
     e.stopPropagation()
     const target = e.target as HTMLDivElement;
     // 设置传输数据 index 即为当前的组件在componentList中的索引
@@ -73,6 +82,27 @@ const handleDragStart = (e: DragEvent) => {
             message: '当前浏览器不支持拖拽'
         })
     }
+}
+
+let showTimer: NodeJS.Timeout | undefined;
+const handleMouseEnterComponentItem = (index: number) => {
+
+    if (showTimer !== undefined) {
+        clearTimeout(showTimer); // 取消之前的定时器
+        $bus.emit('isShowComponentView', false)
+    }
+
+    showTimer = setTimeout(() => {
+        componentViewTop.value = Math.floor(index / 2) * 52 + 50;
+        listIndex.value = index
+        $bus.emit('isShowComponentView', true);
+    }, 1300)
+
+}
+
+const handleMouseLeaveComponentItem = () => {
+    clearTimeout(showTimer)
+    $bus.emit('isShowComponentView', false)
 }
 </script>
 
@@ -92,6 +122,7 @@ const handleDragStart = (e: DragEvent) => {
         display: flex;
         justify-content: flex-start;
         flex-wrap: wrap;
+        position: relative;
         gap: 15px;
         .component-item {
             height: fit-content;

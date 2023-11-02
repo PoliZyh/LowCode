@@ -149,3 +149,9 @@ export const shapeList: Array<ICustomeComponent> = [
         }
     }
 ]
+
+
+export const listAll: Array<ICustomeComponent> = [
+    ...componentList,
+    ...shapeList
+]
