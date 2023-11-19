@@ -14,9 +14,6 @@ export interface ICustomeEvent {
 }
 
 
-// export type ICustomeStyle = {
-//     [K in keyof ICommonAttr]: ICommonAttr[K];
-// } & ICommonAttr;
 
 export interface ICustomeStyle extends ICommonAttr {
     [key: string]: any;

@@ -7,7 +7,8 @@ interface IComponentResult {
 }
 
 // 不需要补充px的样式
-const notPx = ['opacity']
+const notPx = ['opacity', 'rotate']
+const needDeg = ['']
 
 const clearPosition = (result: IComponentResult) => {
     result['left'] = '0px'
@@ -25,6 +26,9 @@ export const getCustomeComponentStyle = (componentStyle: ICustomeStyle) => {
         } else if (typeof componentStyle[key] === 'number' && !notPx.includes(key)) {
             // number类型并且需要px填充的
             result[key] = `${componentStyle[key]}px`
+        } else if (typeof componentStyle[key] === 'number' && needDeg.includes(key)) {
+            // 需要填充deg
+            result[key] = `${componentStyle[key]}deg`
         } else {
             // 其他
             result[key] = componentStyle[key]
@@ -90,6 +94,7 @@ const styleInputMap: {
     borderWidth: '边框宽度',
     borderRadius: '圆角',
     textAlign: '对齐方式',
+    rotate: '旋转角度',
 }
 
 const selectOptionsMap: {

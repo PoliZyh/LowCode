@@ -15,6 +15,7 @@ export interface ICommonAttr {
     borderWidth: number | null;
     borderRadius: number | null;
     textAlign: 'center' | 'left' | 'right' | null;
+    rotate: number | null;
 }
 
 export interface ICommonAttrInputItem {

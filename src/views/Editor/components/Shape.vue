@@ -3,6 +3,9 @@
     :class="{'active': props.isActive}"
     @click="handleClickComponent"
     @mousedown="handleMouseDownOnShape"
+    :style="{
+        rotate: props.el.style.rotate ? props.el.style.rotate + 'deg' : '',
+    }"
     >
         <!-- 八个点 -->
         <div class="shape-point"
