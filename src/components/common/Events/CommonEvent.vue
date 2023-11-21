@@ -92,7 +92,7 @@ const isShowMethodsDialog = ref(false)
 const isShowLifeCycleDialog = ref(false)
 const isShowHandlerDialog = ref(false)
 const lifeCycleOptions = ref([
-    'onMounted', 'onBeforeUpdate', 'onUpdated', 'onUnmounted', 'onBeforeUnmount'
+    'onBeforeMount', 'onMounted', 'onBeforeUpdate', 'onUpdated', 'onUnmounted', 'onBeforeUnmount'
 ])
 const lifeCycleParams = ref<ILifeCycleEvent>({
     eventName: '',
@@ -121,6 +121,8 @@ const handleAddLifeCycle = () => {
         eventValue: [],
         eventName: ''
     }
+    script.value = ''
+    addType.value = 0
     isShowLifeCycleDialog.value = true
 }
 
@@ -175,6 +177,9 @@ const handleConfirmAddLifeCycle = () => {
     width: 100%;
     .events {
         width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
     }
     h4 {
         display: flex;

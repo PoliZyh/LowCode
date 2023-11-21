@@ -41,7 +41,7 @@ export interface IMessageSysParams {
 
 // 生命周期事件
 export interface ILifeCycleEvent extends ICustomeEvent {
-    eventName: 'onMounted' | 'onBeforeUpdate' | 'onUpdated' | 'onBeforeUnmount' | 'onUnmounted' | '';
+    eventName: 'onBeforeMount' | 'onMounted' | 'onBeforeUpdate' | 'onUpdated' | 'onBeforeUnmount' | 'onUnmounted' | '';
 }
 
 // 交互事件
