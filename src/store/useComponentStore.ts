@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import type { ICustomeComponent, ICustomeStyle } from "@/components/custome-components/types";
 import useContextmenuStore from "./useContextmenuStore";
 import { ElMessage } from "element-plus";
+import type { ISystemEvent, ICustomeEvent, ILifeCycleEvent } from "@/components/custome-components/types";
 
 interface IComponentState {
     curActiveComponent: ICustomeComponent | null;
@@ -117,6 +118,13 @@ const useComponentsStore = defineStore('components', {
             } else {
                 const tempComponent: ICustomeComponent = this.curComponents.splice(index, 1)[0];
                 this.curComponents.unshift(tempComponent)
+            }
+        },
+
+        // 添加脚本到当前激活的组件的生命周期
+        addLifeScriptToActiveComponent(lifeCycle: ILifeCycleEvent) {
+            if (this.curActiveComponent) {
+                this.curActiveComponent.events.lifeCycle.push(lifeCycle)
             }
         }
 

@@ -1,6 +1,6 @@
 <template>
     <Teleport to="#app" >
-        <div class="preview-box" v-show="isShow" >
+        <div class="preview-box" v-if="isShow" >
             <el-button class="back" @click="isShow=false">返回</el-button>
             <div class="pad" ref="downloadDomRef">
                 <div class="preview-canvas"
@@ -14,12 +14,14 @@
                         :style="getShapeStyle(item.style)"
                         class="container"
                         >
-                        <component
-                        :is="item.componentName"
-                        :propValue="item.propValue"
-                        :component-style="getCustomeComponentStyle(item.style)"
-                        :zIndex="index"
-                        ></component>
+                        <EventHandler :el="item">
+                            <component
+                            :is="item.componentName"
+                            :propValue="item.propValue"
+                            :component-style="getCustomeComponentStyle(item.style)"
+                            :zIndex="index"
+                            ></component>
+                        </EventHandler>
                     </div>
                 </div>
 
@@ -43,7 +45,7 @@ import { downloadPicture } from '@/utils/html2png';
 import loading from '@/components/common/Loading/loading'
 import type { ICustomeComponent } from "@/components/custome-components/types";
 import type { ICanvasAttr } from '@/components/common/types';
-
+import EventHandler from './EventHandler.vue';
 
 const componentStore = useComponentsStore()
 const editorRoutesStore = useEditorRoutesStore()

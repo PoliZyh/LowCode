@@ -8,6 +8,9 @@
   --border-c-deep: #e6e6e6;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
 
 * {
   margin: 0;

@@ -15,7 +15,11 @@ export const componentList: Array<ICustomeComponent> = [
         label: '按钮',
         propValue: 'button',
         animations: [],
-        events: [],
+        events: {
+            lifeCycle: [],
+            methods: [],
+            handler: []
+        },
         style: {
             ...commonAttr,
             width: 100,
@@ -31,7 +35,11 @@ export const componentList: Array<ICustomeComponent> = [
         label: '文本',
         propValue: '双击编辑文字',
         animations: [],
-        events: [],
+        events: {
+            lifeCycle: [],
+            methods: [],
+            handler: []
+        },
         style: {
             ...commonAttr,
             width: 210,
@@ -67,7 +75,11 @@ export const componentList: Array<ICustomeComponent> = [
             hasZebraStripe: false,
         },
         animations: [],
-        events: [],
+        events: {
+            lifeCycle: [],
+            methods: [],
+            handler: []
+        },
         style: {
             ...commonAttr,
             width: 310,
@@ -75,7 +87,8 @@ export const componentList: Array<ICustomeComponent> = [
             backgroundColor: '#ffffff',
             textAlign: 'center',
             borderRadius: null,
-            borderColor: '#ffffff',
+            borderColor: '#E4E4E4',
+            borderWidth: 1
         }
     },
     {
@@ -88,7 +101,11 @@ export const componentList: Array<ICustomeComponent> = [
             url: 'https://i.postimg.cc/Znt1jWYF/user.jpg'
         },
         animations: [],
-        events: [],
+        events: {
+            lifeCycle: [],
+            methods: [],
+            handler: []
+        },
         style: {
             ...commonAttr,
             width: 202,
@@ -114,7 +131,11 @@ export const shapeList: Array<ICustomeComponent> = [
         label: '矩形',
         propValue: '',
         animations: [],
-        events: [],
+        events: {
+            lifeCycle: [],
+            methods: [],
+            handler: []
+        },
         style: {
             ...commonAttr,
             width: 300,
@@ -133,7 +154,11 @@ export const shapeList: Array<ICustomeComponent> = [
         label: '圆形',
         propValue: '',
         animations: [],
-        events: [],
+        events: {
+            lifeCycle: [],
+            methods: [],
+            handler: []
+        },
         style: {
             ...commonAttr,
             width: 300,

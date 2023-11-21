@@ -156,7 +156,15 @@ export const getCommonAttrInputStyle = (componentStyle: ICustomeStyle): Array<IC
     return result
 }
 
-
+// 计算旋转后的组件长/宽
+export const getRotatedStyle = (style: ICustomeStyle): ICustomeStyle => {
+    let newStyle = {...style}
+    if (newStyle.rotate && newStyle.rotate !== 0) {
+        newStyle.width = style.width * Math.cos(newStyle.rotate) + style.height * Math.sin(newStyle.rotate)
+        newStyle.height = style.height * Math.cos(newStyle.rotate) + style.width * Math.sin(newStyle.rotate)
+    }
+    return newStyle
+}
 
 
 
